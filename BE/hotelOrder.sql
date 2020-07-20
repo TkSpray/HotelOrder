@@ -140,9 +140,6 @@ alter table checkout_order add constraint FK_Reference_7 foreign key (r_id)
 alter table room add constraint FK_Reference_1 foreign key (t_id)
       references room_type (t_id) on delete restrict on update restrict;
 
-INSERT INTO staff(s_id, s_name, s_gender, phone, address, birthday, e_mail, PASSWORD,remarks)
-VALUES('0001', 'admin', '男', '10086', 'xxx', '2000-01-01', '@admin.com', 'admin', '用来保存登录员工信息，匹配id或邮箱和密码可识别登录');
-
 
 INSERT INTO staff(s_id, s_name, s_gender, phone, address, birthday, e_mail, PASSWORD,remarks)
 VALUES('0001', 'admin', '男', '10086', 'xxx', '2000-01-01', '@admin.com', 'admin', '用来保存登录员工信息，匹配id或邮箱和密码可识别登录');
