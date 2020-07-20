@@ -3,7 +3,8 @@
 <mapper namespace="com.suncaper.hotelorder.mapper.RoomMapper">
   <resultMap id="BaseResultMap" type="com.suncaper.hotelorder.domain.Room">
     <id column="r_id" jdbcType="VARCHAR" property="rId" />
-    <result column="t_id" jdbcType="VARCHAR" property="tId" />
+    <result column="t_id" jdbcType="CHAR" property="tId" />
+    <result column="floor" jdbcType="INTEGER" property="floor" />
     <result column="state" jdbcType="CHAR" property="state" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.suncaper.hotelorder.domain.Room">
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    r_id, t_id, state
+    r_id, t_id, floor, state
   </sql>
   <sql id="Blob_Column_List">
     remarks
@@ -122,10 +123,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.suncaper.hotelorder.domain.Room">
-    insert into room (r_id, t_id, state, 
-      remarks)
-    values (#{rId,jdbcType=VARCHAR}, #{tId,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, 
-      #{remarks,jdbcType=LONGVARCHAR})
+    insert into room (r_id, t_id, floor, 
+      state, remarks)
+    values (#{rId,jdbcType=VARCHAR}, #{tId,jdbcType=CHAR}, #{floor,jdbcType=INTEGER}, 
+      #{state,jdbcType=CHAR}, #{remarks,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.suncaper.hotelorder.domain.Room">
     insert into room
@@ -135,6 +136,9 @@
       </if>
       <if test="tId != null">
         t_id,
+      </if>
+      <if test="floor != null">
+        floor,
       </if>
       <if test="state != null">
         state,
@@ -148,7 +152,10 @@
         #{rId,jdbcType=VARCHAR},
       </if>
       <if test="tId != null">
-        #{tId,jdbcType=VARCHAR},
+        #{tId,jdbcType=CHAR},
+      </if>
+      <if test="floor != null">
+        #{floor,jdbcType=INTEGER},
       </if>
       <if test="state != null">
         #{state,jdbcType=CHAR},
@@ -171,7 +178,10 @@
         r_id = #{record.rId,jdbcType=VARCHAR},
       </if>
       <if test="record.tId != null">
-        t_id = #{record.tId,jdbcType=VARCHAR},
+        t_id = #{record.tId,jdbcType=CHAR},
+      </if>
+      <if test="record.floor != null">
+        floor = #{record.floor,jdbcType=INTEGER},
       </if>
       <if test="record.state != null">
         state = #{record.state,jdbcType=CHAR},
@@ -187,7 +197,8 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update room
     set r_id = #{record.rId,jdbcType=VARCHAR},
-      t_id = #{record.tId,jdbcType=VARCHAR},
+      t_id = #{record.tId,jdbcType=CHAR},
+      floor = #{record.floor,jdbcType=INTEGER},
       state = #{record.state,jdbcType=CHAR},
       remarks = #{record.remarks,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
@@ -197,7 +208,8 @@
   <update id="updateByExample" parameterType="map">
     update room
     set r_id = #{record.rId,jdbcType=VARCHAR},
-      t_id = #{record.tId,jdbcType=VARCHAR},
+      t_id = #{record.tId,jdbcType=CHAR},
+      floor = #{record.floor,jdbcType=INTEGER},
       state = #{record.state,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -207,7 +219,10 @@
     update room
     <set>
       <if test="tId != null">
-        t_id = #{tId,jdbcType=VARCHAR},
+        t_id = #{tId,jdbcType=CHAR},
+      </if>
+      <if test="floor != null">
+        floor = #{floor,jdbcType=INTEGER},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=CHAR},
@@ -220,14 +235,16 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.suncaper.hotelorder.domain.Room">
     update room
-    set t_id = #{tId,jdbcType=VARCHAR},
+    set t_id = #{tId,jdbcType=CHAR},
+      floor = #{floor,jdbcType=INTEGER},
       state = #{state,jdbcType=CHAR},
       remarks = #{remarks,jdbcType=LONGVARCHAR}
     where r_id = #{rId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.suncaper.hotelorder.domain.Room">
     update room
-    set t_id = #{tId,jdbcType=VARCHAR},
+    set t_id = #{tId,jdbcType=CHAR},
+      floor = #{floor,jdbcType=INTEGER},
       state = #{state,jdbcType=CHAR}
     where r_id = #{rId,jdbcType=VARCHAR}
   </update>

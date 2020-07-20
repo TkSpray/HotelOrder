@@ -7,7 +7,6 @@
     <result column="s_gender" jdbcType="CHAR" property="sGender" />
     <result column="phone" jdbcType="CHAR" property="phone" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="birthday" jdbcType="DATE" property="birthday" />
     <result column="e_mail" jdbcType="VARCHAR" property="eMail" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
@@ -73,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    s_id, s_name, s_gender, phone, address, birthday, e_mail, password
+    s_id, s_name, s_gender, phone, address, e_mail, password
   </sql>
   <sql id="Blob_Column_List">
     remarks
@@ -128,13 +127,11 @@
   </delete>
   <insert id="insert" parameterType="com.suncaper.hotelorder.domain.Staff">
     insert into staff (s_id, s_name, s_gender, 
-      phone, address, birthday, 
-      e_mail, password, remarks
-      )
+      phone, address, e_mail, 
+      password, remarks)
     values (#{sId,jdbcType=VARCHAR}, #{sName,jdbcType=VARCHAR}, #{sGender,jdbcType=CHAR}, 
-      #{phone,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
-      #{eMail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{remarks,jdbcType=LONGVARCHAR}
-      )
+      #{phone,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{remarks,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.suncaper.hotelorder.domain.Staff">
     insert into staff
@@ -153,9 +150,6 @@
       </if>
       <if test="address != null">
         address,
-      </if>
-      <if test="birthday != null">
-        birthday,
       </if>
       <if test="eMail != null">
         e_mail,
@@ -182,9 +176,6 @@
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=DATE},
       </if>
       <if test="eMail != null">
         #{eMail,jdbcType=VARCHAR},
@@ -221,9 +212,6 @@
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.birthday != null">
-        birthday = #{record.birthday,jdbcType=DATE},
-      </if>
       <if test="record.eMail != null">
         e_mail = #{record.eMail,jdbcType=VARCHAR},
       </if>
@@ -245,7 +233,6 @@
       s_gender = #{record.sGender,jdbcType=CHAR},
       phone = #{record.phone,jdbcType=CHAR},
       address = #{record.address,jdbcType=VARCHAR},
-      birthday = #{record.birthday,jdbcType=DATE},
       e_mail = #{record.eMail,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       remarks = #{record.remarks,jdbcType=LONGVARCHAR}
@@ -260,7 +247,6 @@
       s_gender = #{record.sGender,jdbcType=CHAR},
       phone = #{record.phone,jdbcType=CHAR},
       address = #{record.address,jdbcType=VARCHAR},
-      birthday = #{record.birthday,jdbcType=DATE},
       e_mail = #{record.eMail,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -282,9 +268,6 @@
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=DATE},
-      </if>
       <if test="eMail != null">
         e_mail = #{eMail,jdbcType=VARCHAR},
       </if>
@@ -303,7 +286,6 @@
       s_gender = #{sGender,jdbcType=CHAR},
       phone = #{phone,jdbcType=CHAR},
       address = #{address,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=DATE},
       e_mail = #{eMail,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       remarks = #{remarks,jdbcType=LONGVARCHAR}
@@ -315,7 +297,6 @@
       s_gender = #{sGender,jdbcType=CHAR},
       phone = #{phone,jdbcType=CHAR},
       address = #{address,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=DATE},
       e_mail = #{eMail,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR}
     where s_id = #{sId,jdbcType=VARCHAR}

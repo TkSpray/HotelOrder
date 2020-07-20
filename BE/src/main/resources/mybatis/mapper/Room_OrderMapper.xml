@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.suncaper.hotelorder.mapper.CheckIn_OrderMapper">
-  <resultMap id="BaseResultMap" type="com.suncaper.hotelorder.domain.CheckIn_Order">
+<mapper namespace="com.suncaper.hotelorder.mapper.Room_OrderMapper">
+  <resultMap id="BaseResultMap" type="com.suncaper.hotelorder.domain.Room_Order">
     <id column="o_id" jdbcType="INTEGER" property="oId" />
-    <result column="s_id" jdbcType="VARCHAR" property="sId" />
     <result column="g_id" jdbcType="VARCHAR" property="gId" />
     <result column="r_id" jdbcType="VARCHAR" property="rId" />
-    <result column="checkin_date" jdbcType="TIMESTAMP" property="checkinDate" />
+    <result column="p_intime" jdbcType="TIMESTAMP" property="pIntime" />
+    <result column="in_time" jdbcType="TIMESTAMP" property="inTime" />
+    <result column="p_outtime" jdbcType="TIMESTAMP" property="pOuttime" />
+    <result column="out_time" jdbcType="TIMESTAMP" property="outTime" />
     <result column="money" jdbcType="INTEGER" property="money" />
     <result column="deposit" jdbcType="INTEGER" property="deposit" />
+    <result column="o_state" jdbcType="CHAR" property="oState" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.suncaper.hotelorder.domain.CheckIn_Order">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.suncaper.hotelorder.domain.Room_Order">
     <result column="remarks" jdbcType="LONGVARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -72,12 +75,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    o_id, s_id, g_id, r_id, checkin_date, money, deposit
+    o_id, g_id, r_id, p_intime, in_time, p_outtime, out_time, money, deposit, o_state
   </sql>
   <sql id="Blob_Column_List">
     remarks
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.suncaper.hotelorder.domain.CheckIn_OrderExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.suncaper.hotelorder.domain.Room_OrderExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -85,7 +88,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from checkin_order
+    from room_order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,13 +96,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.suncaper.hotelorder.domain.CheckIn_OrderExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.suncaper.hotelorder.domain.Room_OrderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from checkin_order
+    from room_order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -112,35 +115,34 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from checkin_order
+    from room_order
     where o_id = #{oId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from checkin_order
+    delete from room_order
     where o_id = #{oId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.suncaper.hotelorder.domain.CheckIn_OrderExample">
-    delete from checkin_order
+  <delete id="deleteByExample" parameterType="com.suncaper.hotelorder.domain.Room_OrderExample">
+    delete from room_order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.suncaper.hotelorder.domain.CheckIn_Order">
-    insert into checkin_order (o_id, s_id, g_id, 
-      r_id, checkin_date, money, 
-      deposit, remarks)
-    values (#{oId,jdbcType=INTEGER}, #{sId,jdbcType=VARCHAR}, #{gId,jdbcType=VARCHAR}, 
-      #{rId,jdbcType=VARCHAR}, #{checkinDate,jdbcType=TIMESTAMP}, #{money,jdbcType=INTEGER}, 
-      #{deposit,jdbcType=INTEGER}, #{remarks,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.suncaper.hotelorder.domain.Room_Order">
+    insert into room_order (o_id, g_id, r_id, 
+      p_intime, in_time, p_outtime, 
+      out_time, money, deposit, 
+      o_state, remarks)
+    values (#{oId,jdbcType=INTEGER}, #{gId,jdbcType=VARCHAR}, #{rId,jdbcType=VARCHAR}, 
+      #{pIntime,jdbcType=TIMESTAMP}, #{inTime,jdbcType=TIMESTAMP}, #{pOuttime,jdbcType=TIMESTAMP}, 
+      #{outTime,jdbcType=TIMESTAMP}, #{money,jdbcType=INTEGER}, #{deposit,jdbcType=INTEGER}, 
+      #{oState,jdbcType=CHAR}, #{remarks,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.suncaper.hotelorder.domain.CheckIn_Order">
-    insert into checkin_order
+  <insert id="insertSelective" parameterType="com.suncaper.hotelorder.domain.Room_Order">
+    insert into room_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="oId != null">
         o_id,
-      </if>
-      <if test="sId != null">
-        s_id,
       </if>
       <if test="gId != null">
         g_id,
@@ -148,14 +150,26 @@
       <if test="rId != null">
         r_id,
       </if>
-      <if test="checkinDate != null">
-        checkin_date,
+      <if test="pIntime != null">
+        p_intime,
+      </if>
+      <if test="inTime != null">
+        in_time,
+      </if>
+      <if test="pOuttime != null">
+        p_outtime,
+      </if>
+      <if test="outTime != null">
+        out_time,
       </if>
       <if test="money != null">
         money,
       </if>
       <if test="deposit != null">
         deposit,
+      </if>
+      <if test="oState != null">
+        o_state,
       </if>
       <if test="remarks != null">
         remarks,
@@ -165,17 +179,23 @@
       <if test="oId != null">
         #{oId,jdbcType=INTEGER},
       </if>
-      <if test="sId != null">
-        #{sId,jdbcType=VARCHAR},
-      </if>
       <if test="gId != null">
         #{gId,jdbcType=VARCHAR},
       </if>
       <if test="rId != null">
         #{rId,jdbcType=VARCHAR},
       </if>
-      <if test="checkinDate != null">
-        #{checkinDate,jdbcType=TIMESTAMP},
+      <if test="pIntime != null">
+        #{pIntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inTime != null">
+        #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pOuttime != null">
+        #{pOuttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outTime != null">
+        #{outTime,jdbcType=TIMESTAMP},
       </if>
       <if test="money != null">
         #{money,jdbcType=INTEGER},
@@ -183,25 +203,25 @@
       <if test="deposit != null">
         #{deposit,jdbcType=INTEGER},
       </if>
+      <if test="oState != null">
+        #{oState,jdbcType=CHAR},
+      </if>
       <if test="remarks != null">
         #{remarks,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.suncaper.hotelorder.domain.CheckIn_OrderExample" resultType="java.lang.Long">
-    select count(*) from checkin_order
+  <select id="countByExample" parameterType="com.suncaper.hotelorder.domain.Room_OrderExample" resultType="java.lang.Long">
+    select count(*) from room_order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update checkin_order
+    update room_order
     <set>
       <if test="record.oId != null">
         o_id = #{record.oId,jdbcType=INTEGER},
-      </if>
-      <if test="record.sId != null">
-        s_id = #{record.sId,jdbcType=VARCHAR},
       </if>
       <if test="record.gId != null">
         g_id = #{record.gId,jdbcType=VARCHAR},
@@ -209,14 +229,26 @@
       <if test="record.rId != null">
         r_id = #{record.rId,jdbcType=VARCHAR},
       </if>
-      <if test="record.checkinDate != null">
-        checkin_date = #{record.checkinDate,jdbcType=TIMESTAMP},
+      <if test="record.pIntime != null">
+        p_intime = #{record.pIntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inTime != null">
+        in_time = #{record.inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pOuttime != null">
+        p_outtime = #{record.pOuttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.outTime != null">
+        out_time = #{record.outTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.money != null">
         money = #{record.money,jdbcType=INTEGER},
       </if>
       <if test="record.deposit != null">
         deposit = #{record.deposit,jdbcType=INTEGER},
+      </if>
+      <if test="record.oState != null">
+        o_state = #{record.oState,jdbcType=CHAR},
       </if>
       <if test="record.remarks != null">
         remarks = #{record.remarks,jdbcType=LONGVARCHAR},
@@ -227,46 +259,58 @@
     </if>
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
-    update checkin_order
+    update room_order
     set o_id = #{record.oId,jdbcType=INTEGER},
-      s_id = #{record.sId,jdbcType=VARCHAR},
       g_id = #{record.gId,jdbcType=VARCHAR},
       r_id = #{record.rId,jdbcType=VARCHAR},
-      checkin_date = #{record.checkinDate,jdbcType=TIMESTAMP},
+      p_intime = #{record.pIntime,jdbcType=TIMESTAMP},
+      in_time = #{record.inTime,jdbcType=TIMESTAMP},
+      p_outtime = #{record.pOuttime,jdbcType=TIMESTAMP},
+      out_time = #{record.outTime,jdbcType=TIMESTAMP},
       money = #{record.money,jdbcType=INTEGER},
       deposit = #{record.deposit,jdbcType=INTEGER},
+      o_state = #{record.oState,jdbcType=CHAR},
       remarks = #{record.remarks,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update checkin_order
+    update room_order
     set o_id = #{record.oId,jdbcType=INTEGER},
-      s_id = #{record.sId,jdbcType=VARCHAR},
       g_id = #{record.gId,jdbcType=VARCHAR},
       r_id = #{record.rId,jdbcType=VARCHAR},
-      checkin_date = #{record.checkinDate,jdbcType=TIMESTAMP},
+      p_intime = #{record.pIntime,jdbcType=TIMESTAMP},
+      in_time = #{record.inTime,jdbcType=TIMESTAMP},
+      p_outtime = #{record.pOuttime,jdbcType=TIMESTAMP},
+      out_time = #{record.outTime,jdbcType=TIMESTAMP},
       money = #{record.money,jdbcType=INTEGER},
-      deposit = #{record.deposit,jdbcType=INTEGER}
+      deposit = #{record.deposit,jdbcType=INTEGER},
+      o_state = #{record.oState,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.suncaper.hotelorder.domain.CheckIn_Order">
-    update checkin_order
+  <update id="updateByPrimaryKeySelective" parameterType="com.suncaper.hotelorder.domain.Room_Order">
+    update room_order
     <set>
-      <if test="sId != null">
-        s_id = #{sId,jdbcType=VARCHAR},
-      </if>
       <if test="gId != null">
         g_id = #{gId,jdbcType=VARCHAR},
       </if>
       <if test="rId != null">
         r_id = #{rId,jdbcType=VARCHAR},
       </if>
-      <if test="checkinDate != null">
-        checkin_date = #{checkinDate,jdbcType=TIMESTAMP},
+      <if test="pIntime != null">
+        p_intime = #{pIntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inTime != null">
+        in_time = #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pOuttime != null">
+        p_outtime = #{pOuttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outTime != null">
+        out_time = #{outTime,jdbcType=TIMESTAMP},
       </if>
       <if test="money != null">
         money = #{money,jdbcType=INTEGER},
@@ -274,31 +318,40 @@
       <if test="deposit != null">
         deposit = #{deposit,jdbcType=INTEGER},
       </if>
+      <if test="oState != null">
+        o_state = #{oState,jdbcType=CHAR},
+      </if>
       <if test="remarks != null">
         remarks = #{remarks,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where o_id = #{oId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.suncaper.hotelorder.domain.CheckIn_Order">
-    update checkin_order
-    set s_id = #{sId,jdbcType=VARCHAR},
-      g_id = #{gId,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.suncaper.hotelorder.domain.Room_Order">
+    update room_order
+    set g_id = #{gId,jdbcType=VARCHAR},
       r_id = #{rId,jdbcType=VARCHAR},
-      checkin_date = #{checkinDate,jdbcType=TIMESTAMP},
+      p_intime = #{pIntime,jdbcType=TIMESTAMP},
+      in_time = #{inTime,jdbcType=TIMESTAMP},
+      p_outtime = #{pOuttime,jdbcType=TIMESTAMP},
+      out_time = #{outTime,jdbcType=TIMESTAMP},
       money = #{money,jdbcType=INTEGER},
       deposit = #{deposit,jdbcType=INTEGER},
+      o_state = #{oState,jdbcType=CHAR},
       remarks = #{remarks,jdbcType=LONGVARCHAR}
     where o_id = #{oId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.suncaper.hotelorder.domain.CheckIn_Order">
-    update checkin_order
-    set s_id = #{sId,jdbcType=VARCHAR},
-      g_id = #{gId,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.suncaper.hotelorder.domain.Room_Order">
+    update room_order
+    set g_id = #{gId,jdbcType=VARCHAR},
       r_id = #{rId,jdbcType=VARCHAR},
-      checkin_date = #{checkinDate,jdbcType=TIMESTAMP},
+      p_intime = #{pIntime,jdbcType=TIMESTAMP},
+      in_time = #{inTime,jdbcType=TIMESTAMP},
+      p_outtime = #{pOuttime,jdbcType=TIMESTAMP},
+      out_time = #{outTime,jdbcType=TIMESTAMP},
       money = #{money,jdbcType=INTEGER},
-      deposit = #{deposit,jdbcType=INTEGER}
+      deposit = #{deposit,jdbcType=INTEGER},
+      o_state = #{oState,jdbcType=CHAR}
     where o_id = #{oId,jdbcType=INTEGER}
   </update>
 </mapper>

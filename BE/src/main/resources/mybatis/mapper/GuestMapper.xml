@@ -5,8 +5,6 @@
     <id column="g_id" jdbcType="VARCHAR" property="gId" />
     <result column="g_name" jdbcType="VARCHAR" property="gName" />
     <result column="g_gender" jdbcType="CHAR" property="gGender" />
-    <result column="birthday" jdbcType="DATE" property="birthday" />
-    <result column="card_number" jdbcType="VARCHAR" property="cardNumber" />
     <result column="phone" jdbcType="CHAR" property="phone" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.suncaper.hotelorder.domain.Guest">
@@ -71,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    g_id, g_name, g_gender, birthday, card_number, phone
+    g_id, g_name, g_gender, phone
   </sql>
   <sql id="Blob_Column_List">
     remarks
@@ -126,11 +124,9 @@
   </delete>
   <insert id="insert" parameterType="com.suncaper.hotelorder.domain.Guest">
     insert into guest (g_id, g_name, g_gender, 
-      birthday, card_number, phone, 
-      remarks)
+      phone, remarks)
     values (#{gId,jdbcType=VARCHAR}, #{gName,jdbcType=VARCHAR}, #{gGender,jdbcType=CHAR}, 
-      #{birthday,jdbcType=DATE}, #{cardNumber,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, 
-      #{remarks,jdbcType=LONGVARCHAR})
+      #{phone,jdbcType=CHAR}, #{remarks,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.suncaper.hotelorder.domain.Guest">
     insert into guest
@@ -143,12 +139,6 @@
       </if>
       <if test="gGender != null">
         g_gender,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="cardNumber != null">
-        card_number,
       </if>
       <if test="phone != null">
         phone,
@@ -166,12 +156,6 @@
       </if>
       <if test="gGender != null">
         #{gGender,jdbcType=CHAR},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=DATE},
-      </if>
-      <if test="cardNumber != null">
-        #{cardNumber,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         #{phone,jdbcType=CHAR},
@@ -199,12 +183,6 @@
       <if test="record.gGender != null">
         g_gender = #{record.gGender,jdbcType=CHAR},
       </if>
-      <if test="record.birthday != null">
-        birthday = #{record.birthday,jdbcType=DATE},
-      </if>
-      <if test="record.cardNumber != null">
-        card_number = #{record.cardNumber,jdbcType=VARCHAR},
-      </if>
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=CHAR},
       </if>
@@ -221,8 +199,6 @@
     set g_id = #{record.gId,jdbcType=VARCHAR},
       g_name = #{record.gName,jdbcType=VARCHAR},
       g_gender = #{record.gGender,jdbcType=CHAR},
-      birthday = #{record.birthday,jdbcType=DATE},
-      card_number = #{record.cardNumber,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=CHAR},
       remarks = #{record.remarks,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
@@ -234,8 +210,6 @@
     set g_id = #{record.gId,jdbcType=VARCHAR},
       g_name = #{record.gName,jdbcType=VARCHAR},
       g_gender = #{record.gGender,jdbcType=CHAR},
-      birthday = #{record.birthday,jdbcType=DATE},
-      card_number = #{record.cardNumber,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -250,12 +224,6 @@
       <if test="gGender != null">
         g_gender = #{gGender,jdbcType=CHAR},
       </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=DATE},
-      </if>
-      <if test="cardNumber != null">
-        card_number = #{cardNumber,jdbcType=VARCHAR},
-      </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=CHAR},
       </if>
@@ -269,8 +237,6 @@
     update guest
     set g_name = #{gName,jdbcType=VARCHAR},
       g_gender = #{gGender,jdbcType=CHAR},
-      birthday = #{birthday,jdbcType=DATE},
-      card_number = #{cardNumber,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},
       remarks = #{remarks,jdbcType=LONGVARCHAR}
     where g_id = #{gId,jdbcType=VARCHAR}
@@ -279,8 +245,6 @@
     update guest
     set g_name = #{gName,jdbcType=VARCHAR},
       g_gender = #{gGender,jdbcType=CHAR},
-      birthday = #{birthday,jdbcType=DATE},
-      card_number = #{cardNumber,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR}
     where g_id = #{gId,jdbcType=VARCHAR}
   </update>

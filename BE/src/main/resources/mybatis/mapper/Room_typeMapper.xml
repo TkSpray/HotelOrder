@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.suncaper.hotelorder.mapper.Room_typeMapper">
   <resultMap id="BaseResultMap" type="com.suncaper.hotelorder.domain.Room_type">
-    <id column="t_id" jdbcType="VARCHAR" property="tId" />
+    <id column="t_id" jdbcType="CHAR" property="tId" />
     <result column="type" jdbcType="CHAR" property="type" />
     <result column="price" jdbcType="INTEGER" property="price" />
     <result column="total" jdbcType="INTEGER" property="total" />
     <result column="surplus" jdbcType="INTEGER" property="surplus" />
-    <result column="capacity" jdbcType="INTEGER" property="capacity" />
+    <result column="breakfast" jdbcType="CHAR" property="breakfast" />
+    <result column="c_people" jdbcType="INTEGER" property="cPeople" />
+    <result column="area" jdbcType="CHAR" property="area" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.suncaper.hotelorder.domain.Room_type">
     <result column="remarks" jdbcType="LONGVARCHAR" property="remarks" />
@@ -71,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    t_id, type, price, total, surplus, capacity
+    t_id, type, price, total, surplus, breakfast, c_people, area
   </sql>
   <sql id="Blob_Column_List">
     remarks
@@ -112,11 +114,11 @@
     ,
     <include refid="Blob_Column_List" />
     from room_type
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from room_type
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.suncaper.hotelorder.domain.Room_typeExample">
     delete from room_type
@@ -125,12 +127,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.suncaper.hotelorder.domain.Room_type">
-    insert into room_type (t_id, type, price, 
-      total, surplus, capacity, 
-      remarks)
-    values (#{tId,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{price,jdbcType=INTEGER}, 
-      #{total,jdbcType=INTEGER}, #{surplus,jdbcType=INTEGER}, #{capacity,jdbcType=INTEGER}, 
-      #{remarks,jdbcType=LONGVARCHAR})
+    insert into room_type (t_id, type, price, total, 
+      surplus, breakfast, c_people, 
+      area, remarks)
+    values (#{tId,jdbcType=CHAR}, #{type,jdbcType=CHAR}, #{price,jdbcType=INTEGER}, #{total,jdbcType=INTEGER}, 
+      #{surplus,jdbcType=INTEGER}, #{breakfast,jdbcType=CHAR}, #{cPeople,jdbcType=INTEGER}, 
+      #{area,jdbcType=CHAR}, #{remarks,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.suncaper.hotelorder.domain.Room_type">
     insert into room_type
@@ -150,8 +152,14 @@
       <if test="surplus != null">
         surplus,
       </if>
-      <if test="capacity != null">
-        capacity,
+      <if test="breakfast != null">
+        breakfast,
+      </if>
+      <if test="cPeople != null">
+        c_people,
+      </if>
+      <if test="area != null">
+        area,
       </if>
       <if test="remarks != null">
         remarks,
@@ -159,7 +167,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="tId != null">
-        #{tId,jdbcType=VARCHAR},
+        #{tId,jdbcType=CHAR},
       </if>
       <if test="type != null">
         #{type,jdbcType=CHAR},
@@ -173,8 +181,14 @@
       <if test="surplus != null">
         #{surplus,jdbcType=INTEGER},
       </if>
-      <if test="capacity != null">
-        #{capacity,jdbcType=INTEGER},
+      <if test="breakfast != null">
+        #{breakfast,jdbcType=CHAR},
+      </if>
+      <if test="cPeople != null">
+        #{cPeople,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=CHAR},
       </if>
       <if test="remarks != null">
         #{remarks,jdbcType=LONGVARCHAR},
@@ -191,7 +205,7 @@
     update room_type
     <set>
       <if test="record.tId != null">
-        t_id = #{record.tId,jdbcType=VARCHAR},
+        t_id = #{record.tId,jdbcType=CHAR},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=CHAR},
@@ -205,8 +219,14 @@
       <if test="record.surplus != null">
         surplus = #{record.surplus,jdbcType=INTEGER},
       </if>
-      <if test="record.capacity != null">
-        capacity = #{record.capacity,jdbcType=INTEGER},
+      <if test="record.breakfast != null">
+        breakfast = #{record.breakfast,jdbcType=CHAR},
+      </if>
+      <if test="record.cPeople != null">
+        c_people = #{record.cPeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=CHAR},
       </if>
       <if test="record.remarks != null">
         remarks = #{record.remarks,jdbcType=LONGVARCHAR},
@@ -218,12 +238,14 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update room_type
-    set t_id = #{record.tId,jdbcType=VARCHAR},
+    set t_id = #{record.tId,jdbcType=CHAR},
       type = #{record.type,jdbcType=CHAR},
       price = #{record.price,jdbcType=INTEGER},
       total = #{record.total,jdbcType=INTEGER},
       surplus = #{record.surplus,jdbcType=INTEGER},
-      capacity = #{record.capacity,jdbcType=INTEGER},
+      breakfast = #{record.breakfast,jdbcType=CHAR},
+      c_people = #{record.cPeople,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=CHAR},
       remarks = #{record.remarks,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -231,12 +253,14 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update room_type
-    set t_id = #{record.tId,jdbcType=VARCHAR},
+    set t_id = #{record.tId,jdbcType=CHAR},
       type = #{record.type,jdbcType=CHAR},
       price = #{record.price,jdbcType=INTEGER},
       total = #{record.total,jdbcType=INTEGER},
       surplus = #{record.surplus,jdbcType=INTEGER},
-      capacity = #{record.capacity,jdbcType=INTEGER}
+      breakfast = #{record.breakfast,jdbcType=CHAR},
+      c_people = #{record.cPeople,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -256,14 +280,20 @@
       <if test="surplus != null">
         surplus = #{surplus,jdbcType=INTEGER},
       </if>
-      <if test="capacity != null">
-        capacity = #{capacity,jdbcType=INTEGER},
+      <if test="breakfast != null">
+        breakfast = #{breakfast,jdbcType=CHAR},
+      </if>
+      <if test="cPeople != null">
+        c_people = #{cPeople,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=CHAR},
       </if>
       <if test="remarks != null">
         remarks = #{remarks,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.suncaper.hotelorder.domain.Room_type">
     update room_type
@@ -271,9 +301,11 @@
       price = #{price,jdbcType=INTEGER},
       total = #{total,jdbcType=INTEGER},
       surplus = #{surplus,jdbcType=INTEGER},
-      capacity = #{capacity,jdbcType=INTEGER},
+      breakfast = #{breakfast,jdbcType=CHAR},
+      c_people = #{cPeople,jdbcType=INTEGER},
+      area = #{area,jdbcType=CHAR},
       remarks = #{remarks,jdbcType=LONGVARCHAR}
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.suncaper.hotelorder.domain.Room_type">
     update room_type
@@ -281,7 +313,9 @@
       price = #{price,jdbcType=INTEGER},
       total = #{total,jdbcType=INTEGER},
       surplus = #{surplus,jdbcType=INTEGER},
-      capacity = #{capacity,jdbcType=INTEGER}
-    where t_id = #{tId,jdbcType=VARCHAR}
+      breakfast = #{breakfast,jdbcType=CHAR},
+      c_people = #{cPeople,jdbcType=INTEGER},
+      area = #{area,jdbcType=CHAR}
+    where t_id = #{tId,jdbcType=CHAR}
   </update>
 </mapper>
