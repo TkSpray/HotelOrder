@@ -44,6 +44,11 @@
         <!--  对应的表生成对应的 实体类 -->
 
         <table tableName="staff" domainObjectName="Staff"/>
+        <table tableName="room" domainObjectName="Room"/>
+        <table tableName="room_type" domainObjectName="Room_type"/>
+        <table tableName="guest" domainObjectName="Guest"/>
+        <table tableName="checkin_order" domainObjectName="CheckIn_Order"/>
+        <table tableName="checkout_order" domainObjectName="CheckOut_Order"/>
 
         <!--  <table tableName="product" domainObjectName="Product"/>
               <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
