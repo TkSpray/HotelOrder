@@ -14,7 +14,7 @@ spring:
     format:
       date: yyyy-MM-dd
 server:
-  port: 8585
+  port: 8080
   servlet:
     encoding:
       charset: utf-8
