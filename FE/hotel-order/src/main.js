@@ -1,12 +1,34 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import qs from 'qs'
+import axios from 'axios'
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
+Vue.prototype.$axios = axios.create({
+  baseURL: '',
+  //请求前处理数据
+  transformRequest: [
+    function(data) {
+      console.log(data)
+      data = qs.stringify(data)
+      return data
+    },
+  ],
+  //请求等待超时时间则中断
+  timeout: 1500,
+  //请求后的data处理
+  transformResponse: [
+    function(data) {
+      console.log(data)
+      return data
+    },
+  ],
+})
 
 new Vue({
   router,
   store,
-  render: h => h(App)
-}).$mount("#app");
+  render: (h) => h(App),
+}).$mount('#app')
