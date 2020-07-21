@@ -1,9 +1,10 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/7/20 22:12:00                           */
+/* Created on:     2020/7/21 16:25:53                           */
 /*==============================================================*/
 
-CREATE DATABASE hotelordr;
+
+CREATE DATABASE hotelorder;
 
 DROP TABLE IF EXISTS guest;
 
@@ -51,7 +52,7 @@ ALTER TABLE room COMMENT '客房表';
 /*==============================================================*/
 CREATE TABLE room_order
 (
-   o_id                 INT(10) NOT NULL,
+   o_id                 INT NOT NULL AUTO_INCREMENT,
    g_id                 VARCHAR(20) NOT NULL,
    r_id                 VARCHAR(8) NOT NULL,
    p_intime             DATETIME,
@@ -63,7 +64,8 @@ CREATE TABLE room_order
    o_state              CHAR(20) NOT NULL,
    remarks              TEXT,
    PRIMARY KEY (o_id)
-);
+)
+AUTO_INCREMENT = 10000;
 
 ALTER TABLE room_order COMMENT '订单表';
 
@@ -92,11 +94,11 @@ ALTER TABLE room_type COMMENT '类型表';
 CREATE TABLE staff
 (
    s_id                 VARCHAR(20) NOT NULL,
-   s_name               VARCHAR(20) NOT NULL,
-   s_gender             CHAR(2) NOT NULL,
+   s_name               VARCHAR(20),
+   s_gender             CHAR(2),
    phone                CHAR(11),
    address              VARCHAR(50),
-   e_mail               VARCHAR(20) NOT NULL,
+   e_mail               VARCHAR(20),
    PASSWORD             VARCHAR(30) NOT NULL,
    remarks              TEXT,
    PRIMARY KEY (s_id),
