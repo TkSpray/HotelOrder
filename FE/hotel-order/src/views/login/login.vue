@@ -1,46 +1,52 @@
 <template>
   <div class="login-bg">
     <div class="login-wrap">
-      <header class="lg-header">
+      <header class="login-header">
         <img src="../../assets/login/logo.svg" class="login-logo" />
         <h1>
           STAR酒店前台管理系统
         </h1>
       </header>
-      <nav class="lg-nav">
-        <b-form inline>
-          <label class="sr-only" for="inline-form-input-name">Name</label>
-          <b-input
-            id="inline-form-input-name"
-            class="mb-2 mr-sm-2 mb-sm-0"
+      <el-form :inline="true" :model="formInline" class="demo-form-inline">
+        <el-form-item>
+          <el-input
+            v-model="formInline.user"
             placeholder="请输入员工号"
-          ></b-input>
-
-          <label class="sr-only" for="inline-form-input-username"
-            >Username</label
-          >
-          <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
-            <!-- <b-icon icon="person"></b-icon> -->
-            <b-input
-              id="inline-form-input-password"
-              placeholder="请输入登录密码"
-              type="password"
-            ></b-input>
-          </b-input-group>
-
-          <!-- <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0"
-            >Remember me</b-form-checkbox
-          > -->
-
-          <b-button variant="primary">登录</b-button>
-        </b-form>
-      </nav>
+            prefix-icon="el-icon-s-custom"
+          ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-input
+            v-model="formInline.password"
+            placeholder="请输入登录密码"
+            type="password"
+            prefix-icon="el-icon-lock"
+          ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <img src="../../assets/login/login.svg" class="login-img" />
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      formInline: {
+        user: '',
+        password: '',
+      },
+    }
+  },
+  methods: {
+    onSubmit() {
+      console.log('submit!')
+    },
+  },
+}
 </script>
 
 <style>
@@ -59,20 +65,20 @@ export default {}
   height: 40vh;
   overflow: hidden;
 }
-.lg-header {
+.login-header {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   margin: 30px auto;
+  margin-bottom: 45px;
 }
-.lg-header h1 {
+.login-header h1 {
   margin: 0;
   margin-left: 30px;
   font-size: 3rem;
 }
-.lg-nav {
-  display: flex;
-  justify-content: center;
+.login-img {
+  height: 40px;
 }
 </style>
