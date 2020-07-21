@@ -17,6 +17,11 @@
   color: #2c3e50;
 }
 
+body,
+html {
+  margin: 0;
+  height: 100%;
+}
 #nav {
   padding: 30px;
 

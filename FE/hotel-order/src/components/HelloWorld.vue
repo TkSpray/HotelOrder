@@ -1,17 +1,9 @@
 <template>
-  <div class="hello">
-    <Cards />
-  </div>
+  <div class="hello"></div>
 </template>
 
 <script>
-import Cards from './Cards'
-export default {
-  name: 'cards',
-  components: {
-    Cards,
-  },
-}
+export default {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

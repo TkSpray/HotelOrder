@@ -1,35 +1,40 @@
 <template>
   <div class="login-bg">
     <div class="login-wrap">
-      <header>
+      <header class="lg-header">
         <img src="../../assets/login/logo.svg" class="login-logo" />
         <h1>
           STAR酒店前台管理系统
         </h1>
       </header>
-      <b-form inline>
-        <label class="sr-only" for="inline-form-input-name">Name</label>
-        <b-input
-          id="inline-form-input-name"
-          class="mb-2 mr-sm-2 mb-sm-0"
-          placeholder="Jane Doe"
-        ></b-input>
-
-        <label class="sr-only" for="inline-form-input-username">Username</label>
-        <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
-          <b-icon icon="person"></b-icon>
+      <nav class="lg-nav">
+        <b-form inline>
+          <label class="sr-only" for="inline-form-input-name">Name</label>
           <b-input
-            id="inline-form-input-username"
-            placeholder="Username"
+            id="inline-form-input-name"
+            class="mb-2 mr-sm-2 mb-sm-0"
+            placeholder="请输入员工号"
           ></b-input>
-        </b-input-group>
 
-        <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0"
-          >Remember me</b-form-checkbox
-        >
+          <label class="sr-only" for="inline-form-input-username"
+            >Username</label
+          >
+          <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
+            <!-- <b-icon icon="person"></b-icon> -->
+            <b-input
+              id="inline-form-input-password"
+              placeholder="请输入登录密码"
+              type="password"
+            ></b-input>
+          </b-input-group>
 
-        <b-button variant="primary">Save</b-button>
-      </b-form>
+          <!-- <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0"
+            >Remember me</b-form-checkbox
+          > -->
+
+          <b-button variant="primary">登录</b-button>
+        </b-form>
+      </nav>
     </div>
   </div>
 </template>
@@ -52,5 +57,22 @@ export default {}
   background-color: rgba(0, 0, 0, 0.498039215686275);
   color: #ffffff;
   height: 40vh;
+  overflow: hidden;
+}
+.lg-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 30px auto;
+}
+.lg-header h1 {
+  margin: 0;
+  margin-left: 30px;
+  font-size: 3rem;
+}
+.lg-nav {
+  display: flex;
+  justify-content: center;
 }
 </style>
