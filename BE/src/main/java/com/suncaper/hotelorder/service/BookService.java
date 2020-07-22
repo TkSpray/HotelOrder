@@ -17,4 +17,10 @@ public interface BookService {
     void addGuest(Guest guest);
 
     void book(Room_Order room_order);
+
+    List<Room_Order> listAllBook();
+
+    boolean cancel_book(int o_id);
+
+    boolean bookToorder(int o_id);
 }
