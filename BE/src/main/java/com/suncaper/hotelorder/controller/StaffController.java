@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-@RequestMapping("/user")
 public class StaffController {
 
     @Autowired
@@ -37,13 +36,13 @@ public class StaffController {
             if (staffInDB.getPassword().equals(staff.getPassword())) {
                 System.out.println("登录成功");
                 //登录成功，进入操作选择界面
-                return " ";
+                return "login_success";
             } else {
                 System.out.println("密码错误");
             }
         }
         //依然在该界面
-        return "";
+        return "login";
     }
 
     /**
@@ -63,11 +62,12 @@ public class StaffController {
         if(isSucceess == true ){
             System.out.println("注册成功。");
             //直接前往操作界面，或者登录界面
-            return"";
+            return"login_success";
         }else{
             System.out.println("注册失败");
+            //提示注册失败
             //返回到登录界面或者注册界面
-            return "";
+            return "register";
         }
     }
 }
