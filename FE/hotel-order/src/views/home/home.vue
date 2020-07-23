@@ -26,8 +26,9 @@
             :default-active="this.$route.path"
             router
             background-color="#f2f2f2"
+            @select="handleSelect"
           >
-            <el-menu-item>
+            <el-menu-item index="/home">
               <i class="el-icon-s-home"></i>
               <span style="font-weight:600;">系统首页</span>
             </el-menu-item>
@@ -36,32 +37,33 @@
             :default-active="this.$route.path"
             router
             active-text-color="#c49800"
+            @select="handleSelect"
           >
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-s-order"></i>
                 <span> 房间预订</span>
               </template>
-              <el-menu-item index="/adminindex/examining">
+              <el-menu-item index="/home/book">
                 办理预订
               </el-menu-item>
-              <el-menu-item index="/adminindex/examined">
+              <el-menu-item index="/home/booklist">
                 预订列表
               </el-menu-item>
             </el-submenu>
-            <el-menu-item>
+            <el-menu-item index="/home/checkin">
               <i class="el-icon-message-solid"></i>
               <span>来客入住</span>
             </el-menu-item>
-            <el-menu-item>
+            <el-menu-item index="/home/checkout">
               <i class="el-icon-s-release"></i>
               <span>办理退房</span>
             </el-menu-item>
-            <el-menu-item>
+            <el-menu-item index="/home/orderlist">
               <i class="el-icon-s-claim"></i>
               <span>订单列表</span>
             </el-menu-item>
-            <el-menu-item>
+            <el-menu-item index="/home/roomlist">
               <i class="el-icon-s-grid"></i>
               <span>房间列表</span>
             </el-menu-item>
@@ -69,9 +71,9 @@
         </el-aside>
         <el-main>
           <header class="main-header">
-            <span> {{ title }}</span>
+            <span class="header-font"> {{ title }}</span>
           </header>
-          <router-view :key="key"></router-view>
+          <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -84,11 +86,22 @@ export default {
     return {
       pid: 0,
       admin: '817号工作人员小花',
-      title: 'index',
-      key: 1,
+      title: '系统首页',
+      map: {
+        book: '办理预订',
+        booklist: '预订列表',
+        checkin: '来客入住',
+        checkout: '办理退房',
+        orderlist: '订单列表',
+        roomlist: '房间列表',
+      },
     }
   },
   methods: {
+    handleSelect(key) {
+      let str = key.substring(6)
+      this.title = str ? this.map[str] : '系统首页'
+    },
     // async logout() {
     //   document.cookie = ''
     //   this.$store.commit('change_state', {
@@ -168,9 +181,14 @@ export default {
   background-color: rgb(242, 242, 242);
   text-align: left;
   width: 100%;
-  padding-left: 30px;
+  font-weight: 700;
 }
 .el-main {
   padding: 0;
+}
+
+.header-font {
+  padding-left: 30px;
+  border-left: solid 5px rgba(26, 101, 188, 1);
 }
 </style>

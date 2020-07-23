@@ -1,7 +1,5 @@
 <template>
-  <el-main>
-    <header class="main-header"></header>
-  </el-main>
+  <div></div>
 </template>
 
 <script>
