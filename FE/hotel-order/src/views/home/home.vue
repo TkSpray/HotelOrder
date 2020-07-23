@@ -68,9 +68,9 @@
           </el-menu>
         </el-aside>
         <el-main>
-          <div class="maintheme">
-            <h2>{{ title }}</h2>
-          </div>
+          <header class="main-header">
+            <span> {{ title }}</span>
+          </header>
           <router-view :key="key"></router-view>
         </el-main>
       </el-container>
@@ -84,7 +84,7 @@ export default {
     return {
       pid: 0,
       admin: '817号工作人员小花',
-      title: '',
+      title: 'index',
       key: 1,
     }
   },
@@ -161,5 +161,16 @@ export default {
 .username {
   font-weight: 600;
   margin: 0 25px 0 15px;
+}
+.main-header {
+  height: 56px;
+  line-height: 56px;
+  background-color: rgb(242, 242, 242);
+  text-align: left;
+  width: 100%;
+  padding-left: 30px;
+}
+.el-main {
+  padding: 0;
 }
 </style>
