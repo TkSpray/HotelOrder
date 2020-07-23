@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface Room_typeMapperExtend {
 
+
+    //
     List<Room_type> selectAllByType(@Param("typeId")String typeId);
 
 }
