@@ -19,31 +19,31 @@ const routes = [
     component: () => import('../views/home/home.vue'),
     children: [
       {
-        path: '/',
+        path: '/home',
         component: () => import('../views/home/index/index.vue'),
       },
       {
-        path: '/book',
+        path: '/home/book',
         component: () => import('../views/home/book/book/book.vue'),
       },
       {
-        path: '/booklist',
+        path: '/home/booklist',
         component: () => import('../views/home/book/booklist/booklist.vue'),
       },
       {
-        path: '/checkin',
+        path: '/home/checkin',
         component: () => import('../views/home/checkin/checkin.vue'),
       },
       {
-        path: '/checkout',
+        path: '/home/checkout',
         component: () => import('../views/home/checkout/checkout.vue'),
       },
       {
-        path: '/orderlist',
+        path: '/home/orderlist',
         component: () => import('../views/home/orderlist/orderlist.vue'),
       },
       {
-        path: '/roomlist',
+        path: '/home/roomlist',
         component: () => import('../views/home/roomlist/roomlist.vue'),
       },
     ],
