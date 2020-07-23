@@ -1,30 +1,52 @@
 package com.suncaper.hotelorder.domain;
 
 public class Room {
-    private String rId;
+    private String roomid;
 
-    private String tId;
+    private Integer roomtype;
+
+    private Integer price;
+
+    private Integer numberofpeople;
 
     private Integer floor;
 
-    private String state;
+    private String area;
 
-    private String remarks;
+    private String includebrk;
 
-    public String getrId() {
-        return rId;
+    private Integer status;
+
+    public String getRoomid() {
+        return roomid;
     }
 
-    public void setrId(String rId) {
-        this.rId = rId == null ? null : rId.trim();
+    public void setRoomid(String roomid) {
+        this.roomid = roomid == null ? null : roomid.trim();
     }
 
-    public String gettId() {
-        return tId;
+    public Integer getRoomtype() {
+        return roomtype;
     }
 
-    public void settId(String tId) {
-        this.tId = tId == null ? null : tId.trim();
+    public void setRoomtype(Integer roomtype) {
+        this.roomtype = roomtype;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getNumberofpeople() {
+        return numberofpeople;
+    }
+
+    public void setNumberofpeople(Integer numberofpeople) {
+        this.numberofpeople = numberofpeople;
     }
 
     public Integer getFloor() {
@@ -35,19 +57,27 @@ public class Room {
         this.floor = floor;
     }
 
-    public String getState() {
-        return state;
+    public String getArea() {
+        return area;
     }
 
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getIncludebrk() {
+        return includebrk;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks == null ? null : remarks.trim();
+    public void setIncludebrk(String includebrk) {
+        this.includebrk = includebrk == null ? null : includebrk.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

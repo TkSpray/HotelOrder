@@ -2,16 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.suncaper.hotelorder.mapper.StaffMapper">
   <resultMap id="BaseResultMap" type="com.suncaper.hotelorder.domain.Staff">
-    <id column="s_id" jdbcType="VARCHAR" property="sId" />
-    <result column="s_name" jdbcType="VARCHAR" property="sName" />
-    <result column="s_gender" jdbcType="CHAR" property="sGender" />
-    <result column="phone" jdbcType="CHAR" property="phone" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="e_mail" jdbcType="VARCHAR" property="eMail" />
+    <id column="staffID" jdbcType="VARCHAR" property="staffid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.suncaper.hotelorder.domain.Staff">
-    <result column="remarks" jdbcType="LONGVARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,27 +66,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    s_id, s_name, s_gender, phone, address, e_mail, password
+    staffID, name, phone, password
   </sql>
-  <sql id="Blob_Column_List">
-    remarks
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.suncaper.hotelorder.domain.StaffExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from staff
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.suncaper.hotelorder.domain.StaffExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -107,17 +82,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from staff
-    where s_id = #{sId,jdbcType=VARCHAR}
+    where staffID = #{staffid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from staff
-    where s_id = #{sId,jdbcType=VARCHAR}
+    where staffID = #{staffid,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.suncaper.hotelorder.domain.StaffExample">
     delete from staff
@@ -126,65 +99,39 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.suncaper.hotelorder.domain.Staff">
-    insert into staff (s_id, s_name, s_gender, 
-      phone, address, e_mail, 
-      password, remarks)
-    values (#{sId,jdbcType=VARCHAR}, #{sName,jdbcType=VARCHAR}, #{sGender,jdbcType=CHAR}, 
-      #{phone,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{remarks,jdbcType=LONGVARCHAR})
+    insert into staff (staffID, name, phone, 
+      password)
+    values (#{staffid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.suncaper.hotelorder.domain.Staff">
     insert into staff
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="sId != null">
-        s_id,
+      <if test="staffid != null">
+        staffID,
       </if>
-      <if test="sName != null">
-        s_name,
-      </if>
-      <if test="sGender != null">
-        s_gender,
+      <if test="name != null">
+        name,
       </if>
       <if test="phone != null">
         phone,
       </if>
-      <if test="address != null">
-        address,
-      </if>
-      <if test="eMail != null">
-        e_mail,
-      </if>
       <if test="password != null">
         password,
       </if>
-      <if test="remarks != null">
-        remarks,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="sId != null">
-        #{sId,jdbcType=VARCHAR},
+      <if test="staffid != null">
+        #{staffid,jdbcType=VARCHAR},
       </if>
-      <if test="sName != null">
-        #{sName,jdbcType=VARCHAR},
-      </if>
-      <if test="sGender != null">
-        #{sGender,jdbcType=CHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=CHAR},
-      </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="eMail != null">
-        #{eMail,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="remarks != null">
-        #{remarks,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -197,57 +144,28 @@
   <update id="updateByExampleSelective" parameterType="map">
     update staff
     <set>
-      <if test="record.sId != null">
-        s_id = #{record.sId,jdbcType=VARCHAR},
+      <if test="record.staffid != null">
+        staffID = #{record.staffid,jdbcType=VARCHAR},
       </if>
-      <if test="record.sName != null">
-        s_name = #{record.sName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sGender != null">
-        s_gender = #{record.sGender,jdbcType=CHAR},
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=CHAR},
-      </if>
-      <if test="record.address != null">
-        address = #{record.address,jdbcType=VARCHAR},
-      </if>
-      <if test="record.eMail != null">
-        e_mail = #{record.eMail,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remarks != null">
-        remarks = #{record.remarks,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update staff
-    set s_id = #{record.sId,jdbcType=VARCHAR},
-      s_name = #{record.sName,jdbcType=VARCHAR},
-      s_gender = #{record.sGender,jdbcType=CHAR},
-      phone = #{record.phone,jdbcType=CHAR},
-      address = #{record.address,jdbcType=VARCHAR},
-      e_mail = #{record.eMail,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      remarks = #{record.remarks,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map">
     update staff
-    set s_id = #{record.sId,jdbcType=VARCHAR},
-      s_name = #{record.sName,jdbcType=VARCHAR},
-      s_gender = #{record.sGender,jdbcType=CHAR},
-      phone = #{record.phone,jdbcType=CHAR},
-      address = #{record.address,jdbcType=VARCHAR},
-      e_mail = #{record.eMail,jdbcType=VARCHAR},
+    set staffID = #{record.staffid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -256,49 +174,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.suncaper.hotelorder.domain.Staff">
     update staff
     <set>
-      <if test="sName != null">
-        s_name = #{sName,jdbcType=VARCHAR},
-      </if>
-      <if test="sGender != null">
-        s_gender = #{sGender,jdbcType=CHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        phone = #{phone,jdbcType=CHAR},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="eMail != null">
-        e_mail = #{eMail,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="remarks != null">
-        remarks = #{remarks,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where s_id = #{sId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.suncaper.hotelorder.domain.Staff">
-    update staff
-    set s_name = #{sName,jdbcType=VARCHAR},
-      s_gender = #{sGender,jdbcType=CHAR},
-      phone = #{phone,jdbcType=CHAR},
-      address = #{address,jdbcType=VARCHAR},
-      e_mail = #{eMail,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=LONGVARCHAR}
-    where s_id = #{sId,jdbcType=VARCHAR}
+    where staffID = #{staffid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.suncaper.hotelorder.domain.Staff">
     update staff
-    set s_name = #{sName,jdbcType=VARCHAR},
-      s_gender = #{sGender,jdbcType=CHAR},
-      phone = #{phone,jdbcType=CHAR},
-      address = #{address,jdbcType=VARCHAR},
-      e_mail = #{eMail,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR}
-    where s_id = #{sId,jdbcType=VARCHAR}
+    where staffID = #{staffid,jdbcType=VARCHAR}
   </update>
 </mapper>
