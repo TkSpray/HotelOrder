@@ -6,8 +6,10 @@
           <el-col :span="12" class="head1">
             <div class="logowrapper">
               <img src="../../assets/home/logo.svg" class="logo" />
-              <span class="tohome">
-                <router-link to="/adminindex">STAR酒店前台管理系统</router-link>
+              <span class="tohome" @click="changeTitle('/home')">
+                <router-link to="/home">
+                  STAR酒店前台管理系统
+                </router-link>
               </span>
             </div>
           </el-col>
@@ -26,7 +28,7 @@
             :default-active="this.$route.path"
             router
             background-color="#f2f2f2"
-            @select="handleSelect"
+            @select="changeTitle"
           >
             <el-menu-item index="/home">
               <i class="el-icon-s-home"></i>
@@ -37,7 +39,7 @@
             :default-active="this.$route.path"
             router
             active-text-color="#c49800"
-            @select="handleSelect"
+            @select="changeTitle"
           >
             <el-submenu index="1">
               <template slot="title">
@@ -73,7 +75,7 @@
           <header class="main-header">
             <span class="header-font"> {{ title }}</span>
           </header>
-          <router-view></router-view>
+          <router-view @getTitle="changeTitle"></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -98,8 +100,8 @@ export default {
     }
   },
   methods: {
-    handleSelect(key) {
-      let str = key.substring(6)
+    changeTitle(title) {
+      let str = title.substring(6)
       this.title = str ? this.map[str] : '系统首页'
     },
     // async logout() {
