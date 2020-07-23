@@ -45,9 +45,7 @@
 
         <table tableName="staff" domainObjectName="Staff"/>
         <table tableName="room" domainObjectName="Room"/>
-        <table tableName="room_type" domainObjectName="Room_type"/>
-        <table tableName="guest" domainObjectName="Guest"/>
-        <table tableName="room_order" domainObjectName="Room_Order"/>
+        <table tableName="orders" domainObjectName="Orders"/>
 
         <!--  <table tableName="product" domainObjectName="Product"/>
               <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >

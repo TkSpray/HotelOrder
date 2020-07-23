@@ -1,116 +1,66 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/7/21 16:25:53                           */
+/* Created on:     2020/7/23 16:57:40                           */
 /*==============================================================*/
 
 
-CREATE DATABASE hotelorder;
+drop table if exists Orders;
 
-DROP TABLE IF EXISTS guest;
+drop table if exists Room;
 
-DROP TABLE IF EXISTS room;
-
-DROP TABLE IF EXISTS room_order;
-
-DROP TABLE IF EXISTS room_type;
-
-DROP TABLE IF EXISTS staff;
+drop table if exists Staff;
 
 /*==============================================================*/
-/* Table: guest                                                 */
+/* Table: Orders                                                */
 /*==============================================================*/
-CREATE TABLE guest
+create table Orders
 (
-   g_id                 VARCHAR(20) NOT NULL,
-   g_name               VARCHAR(20) NOT NULL,
-   g_gender             CHAR(2) NOT NULL,
-   phone                CHAR(11) NOT NULL,
-   remarks              TEXT,
-   PRIMARY KEY (g_id),
-   CHECK (g_gender IN ('男','女'))
+   orderID              int not null auto_increment,
+   guestID              varchar(20) not null,
+   name                 varchar(20),
+   phone                varchar(13),
+   roomID               varchar(10) not null,
+   roomtype             varchar(10) not null,
+   ordertime            date,
+   preintime            date,
+   intime               date,
+   preouttime           date,
+   outtime              date,
+   total                varchar(13),
+   price                int,
+   overtime             char(5),
+   orderState           int not null,
+   primary key (orderID)
 );
 
-ALTER TABLE guest COMMENT '客户信息';
-
 /*==============================================================*/
-/* Table: room                                                  */
+/* Table: Room                                                  */
 /*==============================================================*/
-CREATE TABLE room
+create table Room
 (
-   r_id                 VARCHAR(8) NOT NULL,
-   t_id                 CHAR(10) NOT NULL,
-   FLOOR                INT NOT NULL,
-   state                CHAR(4) NOT NULL,
-   remarks              TEXT,
-   PRIMARY KEY (r_id)
+   roomID               varchar(10) not null,
+   roomtype             int not null,
+   price                int not null,
+   numberofpeople       int not null,
+   floor                int not null,
+   area                 varchar(10) not null,
+   includebrk           varchar(10) not null,
+   status               int not null,
+   primary key (roomID)
 );
 
-ALTER TABLE room COMMENT '客房表';
-
 /*==============================================================*/
-/* Table: room_order                                            */
+/* Table: Staff                                                 */
 /*==============================================================*/
-CREATE TABLE room_order
+create table Staff
 (
-   o_id                 INT NOT NULL AUTO_INCREMENT,
-   g_id                 VARCHAR(20) NOT NULL,
-   r_id                 VARCHAR(8) NOT NULL,
-   p_intime             DATETIME,
-   in_time              DATETIME,
-   p_outtime            DATETIME,
-   out_time             DATETIME,
-   money                INT,
-   deposit              INT,
-   o_state              CHAR(20) NOT NULL,
-   remarks              TEXT,
-   PRIMARY KEY (o_id)
-)
-AUTO_INCREMENT = 10000;
-
-ALTER TABLE room_order COMMENT '订单表';
-
-/*==============================================================*/
-/* Table: room_type                                             */
-/*==============================================================*/
-CREATE TABLE room_type
-(
-   t_id                 CHAR(10) NOT NULL,
-   TYPE                 CHAR(10) NOT NULL,
-   price                INT NOT NULL DEFAULT 160,
-   total                INT NOT NULL DEFAULT 100,
-   surplus              INT NOT NULL DEFAULT 100,
-   breakfast            CHAR(10) NOT NULL,
-   c_people             INT NOT NULL,
-   AREA                 CHAR(10) NOT NULL DEFAULT '50平米',
-   remarks              TEXT,
-   PRIMARY KEY (t_id)
+   staffID              varchar(20) not null,
+   name                 varchar(20) not null,
+   phone                varchar(13) not null,
+   password             varchar(20) not null,
+   primary key (staffID)
 );
 
-ALTER TABLE room_type COMMENT '类型表';
-
-/*==============================================================*/
-/* Table: staff                                                 */
-/*==============================================================*/
-CREATE TABLE staff
-(
-   s_id                 VARCHAR(20) NOT NULL,
-   s_name               VARCHAR(20),
-   s_gender             CHAR(2),
-   phone                CHAR(11),
-   address              VARCHAR(50),
-   e_mail               VARCHAR(20),
-   PASSWORD             VARCHAR(30) NOT NULL,
-   remarks              TEXT,
-   PRIMARY KEY (s_id),
-   CHECK (s_gender IN ('男','女'))
-);
-
-ALTER TABLE room ADD CONSTRAINT FK_Reference_1 FOREIGN KEY (t_id)
-      REFERENCES room_type (t_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-ALTER TABLE room_order ADD CONSTRAINT FK_Reference_3 FOREIGN KEY (g_id)
-      REFERENCES guest (g_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-ALTER TABLE room_order ADD CONSTRAINT FK_Reference_4 FOREIGN KEY (r_id)
-      REFERENCES room (r_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+alter table Orders add constraint FK_Reference_1 foreign key (roomID)
+      references Room (roomID) on delete restrict on update restrict;
 
