@@ -327,7 +327,8 @@
 
     param:{
         orderid:int,        //订单ID
-        outtime:Date       //退房时间
+        outtime:Date,       //退房时间
+        "overtime": boolean //是否超时
     }
 }
 ```

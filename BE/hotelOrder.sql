@@ -1,42 +1,42 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/7/23 16:57:40                           */
+/* Created on:     2020/7/24 20:28:35                           */
 /*==============================================================*/
 
 
-drop table if exists Orders;
+drop table if exists orders;
 
-drop table if exists Room;
+drop table if exists room;
 
-drop table if exists Staff;
+drop table if exists staff;
 
 /*==============================================================*/
-/* Table: Orders                                                */
+/* Table: orders                                                */
 /*==============================================================*/
-create table Orders
+create table orders
 (
    orderID              int not null auto_increment,
    guestID              varchar(20) not null,
    name                 varchar(20),
    phone                varchar(13),
    roomID               varchar(10) not null,
-   roomtype             varchar(10) not null,
+   roomtype             int not null,
    ordertime            date,
    preintime            date,
    intime               date,
    preouttime           date,
    outtime              date,
-   total                varchar(13),
+   total                int,
    price                int,
-   overtime             char(5),
+   overtime             bool,
    orderState           int not null,
    primary key (orderID)
 );
 
 /*==============================================================*/
-/* Table: Room                                                  */
+/* Table: room                                                  */
 /*==============================================================*/
-create table Room
+create table room
 (
    roomID               varchar(10) not null,
    roomtype             int not null,
@@ -50,9 +50,9 @@ create table Room
 );
 
 /*==============================================================*/
-/* Table: Staff                                                 */
+/* Table: staff                                                 */
 /*==============================================================*/
-create table Staff
+create table staff
 (
    staffID              varchar(20) not null,
    name                 varchar(20) not null,
@@ -61,6 +61,6 @@ create table Staff
    primary key (staffID)
 );
 
-alter table Orders add constraint FK_Reference_1 foreign key (roomID)
-      references Room (roomID) on delete restrict on update restrict;
+alter table orders add constraint FK_Reference_1 foreign key (roomID)
+      references room (roomID) on delete restrict on update restrict;
 

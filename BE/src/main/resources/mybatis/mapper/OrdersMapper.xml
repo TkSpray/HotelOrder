@@ -7,15 +7,15 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="roomID" jdbcType="VARCHAR" property="roomid" />
-    <result column="roomtype" jdbcType="VARCHAR" property="roomtype" />
+    <result column="roomtype" jdbcType="INTEGER" property="roomtype" />
     <result column="ordertime" jdbcType="DATE" property="ordertime" />
     <result column="preintime" jdbcType="DATE" property="preintime" />
     <result column="intime" jdbcType="DATE" property="intime" />
     <result column="preouttime" jdbcType="DATE" property="preouttime" />
     <result column="outtime" jdbcType="DATE" property="outtime" />
-    <result column="total" jdbcType="VARCHAR" property="total" />
+    <result column="total" jdbcType="INTEGER" property="total" />
     <result column="price" jdbcType="INTEGER" property="price" />
-    <result column="overtime" jdbcType="CHAR" property="overtime" />
+    <result column="overtime" jdbcType="BIT" property="overtime" />
     <result column="orderState" jdbcType="INTEGER" property="orderstate" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -118,10 +118,10 @@
       price, overtime, orderState
       )
     values (#{orderid,jdbcType=INTEGER}, #{guestid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{roomid,jdbcType=VARCHAR}, #{roomtype,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{roomid,jdbcType=VARCHAR}, #{roomtype,jdbcType=INTEGER}, 
       #{ordertime,jdbcType=DATE}, #{preintime,jdbcType=DATE}, #{intime,jdbcType=DATE}, 
-      #{preouttime,jdbcType=DATE}, #{outtime,jdbcType=DATE}, #{total,jdbcType=VARCHAR}, 
-      #{price,jdbcType=INTEGER}, #{overtime,jdbcType=CHAR}, #{orderstate,jdbcType=INTEGER}
+      #{preouttime,jdbcType=DATE}, #{outtime,jdbcType=DATE}, #{total,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{overtime,jdbcType=BIT}, #{orderstate,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.suncaper.hotelorder.domain.Orders">
@@ -190,7 +190,7 @@
         #{roomid,jdbcType=VARCHAR},
       </if>
       <if test="roomtype != null">
-        #{roomtype,jdbcType=VARCHAR},
+        #{roomtype,jdbcType=INTEGER},
       </if>
       <if test="ordertime != null">
         #{ordertime,jdbcType=DATE},
@@ -208,13 +208,13 @@
         #{outtime,jdbcType=DATE},
       </if>
       <if test="total != null">
-        #{total,jdbcType=VARCHAR},
+        #{total,jdbcType=INTEGER},
       </if>
       <if test="price != null">
         #{price,jdbcType=INTEGER},
       </if>
       <if test="overtime != null">
-        #{overtime,jdbcType=CHAR},
+        #{overtime,jdbcType=BIT},
       </if>
       <if test="orderstate != null">
         #{orderstate,jdbcType=INTEGER},
@@ -246,7 +246,7 @@
         roomID = #{record.roomid,jdbcType=VARCHAR},
       </if>
       <if test="record.roomtype != null">
-        roomtype = #{record.roomtype,jdbcType=VARCHAR},
+        roomtype = #{record.roomtype,jdbcType=INTEGER},
       </if>
       <if test="record.ordertime != null">
         ordertime = #{record.ordertime,jdbcType=DATE},
@@ -264,13 +264,13 @@
         outtime = #{record.outtime,jdbcType=DATE},
       </if>
       <if test="record.total != null">
-        total = #{record.total,jdbcType=VARCHAR},
+        total = #{record.total,jdbcType=INTEGER},
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=INTEGER},
       </if>
       <if test="record.overtime != null">
-        overtime = #{record.overtime,jdbcType=CHAR},
+        overtime = #{record.overtime,jdbcType=BIT},
       </if>
       <if test="record.orderstate != null">
         orderState = #{record.orderstate,jdbcType=INTEGER},
@@ -287,15 +287,15 @@
       name = #{record.name,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       roomID = #{record.roomid,jdbcType=VARCHAR},
-      roomtype = #{record.roomtype,jdbcType=VARCHAR},
+      roomtype = #{record.roomtype,jdbcType=INTEGER},
       ordertime = #{record.ordertime,jdbcType=DATE},
       preintime = #{record.preintime,jdbcType=DATE},
       intime = #{record.intime,jdbcType=DATE},
       preouttime = #{record.preouttime,jdbcType=DATE},
       outtime = #{record.outtime,jdbcType=DATE},
-      total = #{record.total,jdbcType=VARCHAR},
+      total = #{record.total,jdbcType=INTEGER},
       price = #{record.price,jdbcType=INTEGER},
-      overtime = #{record.overtime,jdbcType=CHAR},
+      overtime = #{record.overtime,jdbcType=BIT},
       orderState = #{record.orderstate,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -317,7 +317,7 @@
         roomID = #{roomid,jdbcType=VARCHAR},
       </if>
       <if test="roomtype != null">
-        roomtype = #{roomtype,jdbcType=VARCHAR},
+        roomtype = #{roomtype,jdbcType=INTEGER},
       </if>
       <if test="ordertime != null">
         ordertime = #{ordertime,jdbcType=DATE},
@@ -335,13 +335,13 @@
         outtime = #{outtime,jdbcType=DATE},
       </if>
       <if test="total != null">
-        total = #{total,jdbcType=VARCHAR},
+        total = #{total,jdbcType=INTEGER},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=INTEGER},
       </if>
       <if test="overtime != null">
-        overtime = #{overtime,jdbcType=CHAR},
+        overtime = #{overtime,jdbcType=BIT},
       </if>
       <if test="orderstate != null">
         orderState = #{orderstate,jdbcType=INTEGER},
@@ -355,15 +355,15 @@
       name = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       roomID = #{roomid,jdbcType=VARCHAR},
-      roomtype = #{roomtype,jdbcType=VARCHAR},
+      roomtype = #{roomtype,jdbcType=INTEGER},
       ordertime = #{ordertime,jdbcType=DATE},
       preintime = #{preintime,jdbcType=DATE},
       intime = #{intime,jdbcType=DATE},
       preouttime = #{preouttime,jdbcType=DATE},
       outtime = #{outtime,jdbcType=DATE},
-      total = #{total,jdbcType=VARCHAR},
+      total = #{total,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
-      overtime = #{overtime,jdbcType=CHAR},
+      overtime = #{overtime,jdbcType=BIT},
       orderState = #{orderstate,jdbcType=INTEGER}
     where orderID = #{orderid,jdbcType=INTEGER}
   </update>
