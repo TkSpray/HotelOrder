@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/7/24 20:28:35                           */
+/* Created on:     2020/7/24 20:42:31                           */
 /*==============================================================*/
 
 
@@ -44,7 +44,7 @@ create table room
    numberofpeople       int not null,
    floor                int not null,
    area                 varchar(10) not null,
-   includebrk           varchar(10) not null,
+   includebrk           bool not null,
    status               int not null,
    primary key (roomID)
 );

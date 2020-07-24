@@ -13,7 +13,7 @@ public class Room {
 
     private String area;
 
-    private String includebrk;
+    private Boolean includebrk;
 
     private Integer status;
 
@@ -65,12 +65,12 @@ public class Room {
         this.area = area == null ? null : area.trim();
     }
 
-    public String getIncludebrk() {
+    public Boolean getIncludebrk() {
         return includebrk;
     }
 
-    public void setIncludebrk(String includebrk) {
-        this.includebrk = includebrk == null ? null : includebrk.trim();
+    public void setIncludebrk(Boolean includebrk) {
+        this.includebrk = includebrk;
     }
 
     public Integer getStatus() {

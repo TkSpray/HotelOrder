@@ -8,7 +8,7 @@
     <result column="numberofpeople" jdbcType="INTEGER" property="numberofpeople" />
     <result column="floor" jdbcType="INTEGER" property="floor" />
     <result column="area" jdbcType="VARCHAR" property="area" />
-    <result column="includebrk" jdbcType="VARCHAR" property="includebrk" />
+    <result column="includebrk" jdbcType="BIT" property="includebrk" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -108,7 +108,7 @@
       includebrk, status)
     values (#{roomid,jdbcType=VARCHAR}, #{roomtype,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
       #{numberofpeople,jdbcType=INTEGER}, #{floor,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, 
-      #{includebrk,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+      #{includebrk,jdbcType=BIT}, #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.suncaper.hotelorder.domain.Room">
     insert into room
@@ -158,7 +158,7 @@
         #{area,jdbcType=VARCHAR},
       </if>
       <if test="includebrk != null">
-        #{includebrk,jdbcType=VARCHAR},
+        #{includebrk,jdbcType=BIT},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -193,7 +193,7 @@
         area = #{record.area,jdbcType=VARCHAR},
       </if>
       <if test="record.includebrk != null">
-        includebrk = #{record.includebrk,jdbcType=VARCHAR},
+        includebrk = #{record.includebrk,jdbcType=BIT},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
@@ -211,7 +211,7 @@
       numberofpeople = #{record.numberofpeople,jdbcType=INTEGER},
       floor = #{record.floor,jdbcType=INTEGER},
       area = #{record.area,jdbcType=VARCHAR},
-      includebrk = #{record.includebrk,jdbcType=VARCHAR},
+      includebrk = #{record.includebrk,jdbcType=BIT},
       status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -236,7 +236,7 @@
         area = #{area,jdbcType=VARCHAR},
       </if>
       <if test="includebrk != null">
-        includebrk = #{includebrk,jdbcType=VARCHAR},
+        includebrk = #{includebrk,jdbcType=BIT},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
@@ -251,7 +251,7 @@
       numberofpeople = #{numberofpeople,jdbcType=INTEGER},
       floor = #{floor,jdbcType=INTEGER},
       area = #{area,jdbcType=VARCHAR},
-      includebrk = #{includebrk,jdbcType=VARCHAR},
+      includebrk = #{includebrk,jdbcType=BIT},
       status = #{status,jdbcType=INTEGER}
     where roomID = #{roomid,jdbcType=VARCHAR}
   </update>
