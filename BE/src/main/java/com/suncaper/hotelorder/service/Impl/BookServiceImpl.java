@@ -124,10 +124,11 @@ public class BookServiceImpl implements BookService {
      * @param outtime
      */
     @Override
-    public boolean checkout(int orderid, Date outtime) {
+    public boolean checkout(int orderid, Date outtime, boolean overtime) {
         //1、修改订单表
         Orders orders = ordersMapper.selectByPrimaryKey(orderid);
         orders.setOuttime(outtime);
+        orders.setOvertime(overtime);
         orders.setOrderstate(2);
         ordersMapper.updateByPrimaryKeySelective(orders);
 

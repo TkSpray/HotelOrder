@@ -482,62 +482,52 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeEqualTo(String value) {
+        public Criteria andRoomtypeEqualTo(Integer value) {
             addCriterion("roomtype =", value, "roomtype");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeNotEqualTo(String value) {
+        public Criteria andRoomtypeNotEqualTo(Integer value) {
             addCriterion("roomtype <>", value, "roomtype");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeGreaterThan(String value) {
+        public Criteria andRoomtypeGreaterThan(Integer value) {
             addCriterion("roomtype >", value, "roomtype");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeGreaterThanOrEqualTo(String value) {
+        public Criteria andRoomtypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("roomtype >=", value, "roomtype");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeLessThan(String value) {
+        public Criteria andRoomtypeLessThan(Integer value) {
             addCriterion("roomtype <", value, "roomtype");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeLessThanOrEqualTo(String value) {
+        public Criteria andRoomtypeLessThanOrEqualTo(Integer value) {
             addCriterion("roomtype <=", value, "roomtype");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeLike(String value) {
-            addCriterion("roomtype like", value, "roomtype");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomtypeNotLike(String value) {
-            addCriterion("roomtype not like", value, "roomtype");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomtypeIn(List<String> values) {
+        public Criteria andRoomtypeIn(List<Integer> values) {
             addCriterion("roomtype in", values, "roomtype");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeNotIn(List<String> values) {
+        public Criteria andRoomtypeNotIn(List<Integer> values) {
             addCriterion("roomtype not in", values, "roomtype");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeBetween(String value1, String value2) {
+        public Criteria andRoomtypeBetween(Integer value1, Integer value2) {
             addCriterion("roomtype between", value1, value2, "roomtype");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeNotBetween(String value1, String value2) {
+        public Criteria andRoomtypeNotBetween(Integer value1, Integer value2) {
             addCriterion("roomtype not between", value1, value2, "roomtype");
             return (Criteria) this;
         }
@@ -852,62 +842,52 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andTotalEqualTo(String value) {
+        public Criteria andTotalEqualTo(Integer value) {
             addCriterion("total =", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNotEqualTo(String value) {
+        public Criteria andTotalNotEqualTo(Integer value) {
             addCriterion("total <>", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andTotalGreaterThan(String value) {
+        public Criteria andTotalGreaterThan(Integer value) {
             addCriterion("total >", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andTotalGreaterThanOrEqualTo(String value) {
+        public Criteria andTotalGreaterThanOrEqualTo(Integer value) {
             addCriterion("total >=", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andTotalLessThan(String value) {
+        public Criteria andTotalLessThan(Integer value) {
             addCriterion("total <", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andTotalLessThanOrEqualTo(String value) {
+        public Criteria andTotalLessThanOrEqualTo(Integer value) {
             addCriterion("total <=", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andTotalLike(String value) {
-            addCriterion("total like", value, "total");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalNotLike(String value) {
-            addCriterion("total not like", value, "total");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalIn(List<String> values) {
+        public Criteria andTotalIn(List<Integer> values) {
             addCriterion("total in", values, "total");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNotIn(List<String> values) {
+        public Criteria andTotalNotIn(List<Integer> values) {
             addCriterion("total not in", values, "total");
             return (Criteria) this;
         }
 
-        public Criteria andTotalBetween(String value1, String value2) {
+        public Criteria andTotalBetween(Integer value1, Integer value2) {
             addCriterion("total between", value1, value2, "total");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNotBetween(String value1, String value2) {
+        public Criteria andTotalNotBetween(Integer value1, Integer value2) {
             addCriterion("total not between", value1, value2, "total");
             return (Criteria) this;
         }
@@ -982,62 +962,52 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andOvertimeEqualTo(String value) {
+        public Criteria andOvertimeEqualTo(Boolean value) {
             addCriterion("overtime =", value, "overtime");
             return (Criteria) this;
         }
 
-        public Criteria andOvertimeNotEqualTo(String value) {
+        public Criteria andOvertimeNotEqualTo(Boolean value) {
             addCriterion("overtime <>", value, "overtime");
             return (Criteria) this;
         }
 
-        public Criteria andOvertimeGreaterThan(String value) {
+        public Criteria andOvertimeGreaterThan(Boolean value) {
             addCriterion("overtime >", value, "overtime");
             return (Criteria) this;
         }
 
-        public Criteria andOvertimeGreaterThanOrEqualTo(String value) {
+        public Criteria andOvertimeGreaterThanOrEqualTo(Boolean value) {
             addCriterion("overtime >=", value, "overtime");
             return (Criteria) this;
         }
 
-        public Criteria andOvertimeLessThan(String value) {
+        public Criteria andOvertimeLessThan(Boolean value) {
             addCriterion("overtime <", value, "overtime");
             return (Criteria) this;
         }
 
-        public Criteria andOvertimeLessThanOrEqualTo(String value) {
+        public Criteria andOvertimeLessThanOrEqualTo(Boolean value) {
             addCriterion("overtime <=", value, "overtime");
             return (Criteria) this;
         }
 
-        public Criteria andOvertimeLike(String value) {
-            addCriterion("overtime like", value, "overtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOvertimeNotLike(String value) {
-            addCriterion("overtime not like", value, "overtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOvertimeIn(List<String> values) {
+        public Criteria andOvertimeIn(List<Boolean> values) {
             addCriterion("overtime in", values, "overtime");
             return (Criteria) this;
         }
 
-        public Criteria andOvertimeNotIn(List<String> values) {
+        public Criteria andOvertimeNotIn(List<Boolean> values) {
             addCriterion("overtime not in", values, "overtime");
             return (Criteria) this;
         }
 
-        public Criteria andOvertimeBetween(String value1, String value2) {
+        public Criteria andOvertimeBetween(Boolean value1, Boolean value2) {
             addCriterion("overtime between", value1, value2, "overtime");
             return (Criteria) this;
         }
 
-        public Criteria andOvertimeNotBetween(String value1, String value2) {
+        public Criteria andOvertimeNotBetween(Boolean value1, Boolean value2) {
             addCriterion("overtime not between", value1, value2, "overtime");
             return (Criteria) this;
         }

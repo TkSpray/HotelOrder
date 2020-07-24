@@ -13,7 +13,7 @@ public class Orders {
 
     private String roomid;
 
-    private String roomtype;
+    private Integer roomtype;
 
     private Date ordertime;
 
@@ -25,11 +25,11 @@ public class Orders {
 
     private Date outtime;
 
-    private String total;
+    private Integer total;
 
     private Integer price;
 
-    private String overtime;
+    private Boolean overtime;
 
     private Integer orderstate;
 
@@ -73,12 +73,12 @@ public class Orders {
         this.roomid = roomid == null ? null : roomid.trim();
     }
 
-    public String getRoomtype() {
+    public Integer getRoomtype() {
         return roomtype;
     }
 
-    public void setRoomtype(String roomtype) {
-        this.roomtype = roomtype == null ? null : roomtype.trim();
+    public void setRoomtype(Integer roomtype) {
+        this.roomtype = roomtype;
     }
 
     public Date getOrdertime() {
@@ -121,12 +121,12 @@ public class Orders {
         this.outtime = outtime;
     }
 
-    public String getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
-        this.total = total == null ? null : total.trim();
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
     public Integer getPrice() {
@@ -137,12 +137,12 @@ public class Orders {
         this.price = price;
     }
 
-    public String getOvertime() {
+    public Boolean getOvertime() {
         return overtime;
     }
 
-    public void setOvertime(String overtime) {
-        this.overtime = overtime == null ? null : overtime.trim();
+    public void setOvertime(Boolean overtime) {
+        this.overtime = overtime;
     }
 
     public Integer getOrderstate() {
