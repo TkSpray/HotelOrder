@@ -494,62 +494,52 @@ public class RoomExample {
             return (Criteria) this;
         }
 
-        public Criteria andIncludebrkEqualTo(String value) {
+        public Criteria andIncludebrkEqualTo(Boolean value) {
             addCriterion("includebrk =", value, "includebrk");
             return (Criteria) this;
         }
 
-        public Criteria andIncludebrkNotEqualTo(String value) {
+        public Criteria andIncludebrkNotEqualTo(Boolean value) {
             addCriterion("includebrk <>", value, "includebrk");
             return (Criteria) this;
         }
 
-        public Criteria andIncludebrkGreaterThan(String value) {
+        public Criteria andIncludebrkGreaterThan(Boolean value) {
             addCriterion("includebrk >", value, "includebrk");
             return (Criteria) this;
         }
 
-        public Criteria andIncludebrkGreaterThanOrEqualTo(String value) {
+        public Criteria andIncludebrkGreaterThanOrEqualTo(Boolean value) {
             addCriterion("includebrk >=", value, "includebrk");
             return (Criteria) this;
         }
 
-        public Criteria andIncludebrkLessThan(String value) {
+        public Criteria andIncludebrkLessThan(Boolean value) {
             addCriterion("includebrk <", value, "includebrk");
             return (Criteria) this;
         }
 
-        public Criteria andIncludebrkLessThanOrEqualTo(String value) {
+        public Criteria andIncludebrkLessThanOrEqualTo(Boolean value) {
             addCriterion("includebrk <=", value, "includebrk");
             return (Criteria) this;
         }
 
-        public Criteria andIncludebrkLike(String value) {
-            addCriterion("includebrk like", value, "includebrk");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncludebrkNotLike(String value) {
-            addCriterion("includebrk not like", value, "includebrk");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncludebrkIn(List<String> values) {
+        public Criteria andIncludebrkIn(List<Boolean> values) {
             addCriterion("includebrk in", values, "includebrk");
             return (Criteria) this;
         }
 
-        public Criteria andIncludebrkNotIn(List<String> values) {
+        public Criteria andIncludebrkNotIn(List<Boolean> values) {
             addCriterion("includebrk not in", values, "includebrk");
             return (Criteria) this;
         }
 
-        public Criteria andIncludebrkBetween(String value1, String value2) {
+        public Criteria andIncludebrkBetween(Boolean value1, Boolean value2) {
             addCriterion("includebrk between", value1, value2, "includebrk");
             return (Criteria) this;
         }
 
-        public Criteria andIncludebrkNotBetween(String value1, String value2) {
+        public Criteria andIncludebrkNotBetween(Boolean value1, Boolean value2) {
             addCriterion("includebrk not between", value1, value2, "includebrk");
             return (Criteria) this;
         }
