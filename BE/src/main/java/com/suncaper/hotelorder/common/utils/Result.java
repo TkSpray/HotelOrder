@@ -42,6 +42,31 @@ public class Result {
         }
         return jsonResultMap.put("timestamp",System.currentTimeMillis());
     }
+
+    public static  JSONResultMap myJSONResult(int statusCode){
+
+        JSONResultMap jsonResultMap = threadLocal.get();
+        if(jsonResultMap==null){
+            jsonResultMap = new JSONResultMap();
+            threadLocal.set(jsonResultMap);
+        }
+
+        jsonResultMap.put("code", statusCode);
+        return jsonResultMap;
+    }
+
+    public static  JSONResultMap myJSONResult(int statusCode, String message){
+        JSONResultMap jsonResultMap = myJSONResult(statusCode);
+        jsonResultMap.put("message",message);
+        return  jsonResultMap;
+    }
+
+    public static  JSONResultMap myJSONResult(int statusCode, String message, Object data){
+        JSONResultMap jsonResultMap = myJSONResult(statusCode, message);
+        jsonResultMap.put("data", data);
+        return jsonResultMap;
+    }
+
     /*  成功的方法  */
 
     public static  JSONResultMap success(){

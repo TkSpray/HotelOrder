@@ -1,11 +1,14 @@
 package com.suncaper.hotelorder.controller;
 
 
+import com.suncaper.hotelorder.common.utils.Result;
 import com.suncaper.hotelorder.domain.Staff;
 import com.suncaper.hotelorder.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 员工操作持久层功能：
@@ -24,26 +27,28 @@ public class StaffController {
      *      通过账号密码在数据库查找匹配，
      *      若找到，则进入操作大厅
      *      没找到或密码错误，则提示错误
+     *      code：0-登录成功
+     *            -1-账号名错误
+     *            1-密码错误
+     *
      * @param staff   该实例中含有账号和密码
      * @return
      */
     @RequestMapping("/login")
-    public String login(Staff staff) {
+    @ResponseBody
+    public Object login(Staff staff) {
         Staff staffInDB = staffService.login(staff);
         if (staffInDB == null) {
-            System.out.println("用户名不存在");
+            return Result.myJSONResult(-1,"账号错误");
         } else {
             if (staffInDB.getPassword().equals(staff.getPassword())) {
-                System.out.println("登录成功");
-                //登录成功，进入操作选择界面
-                return "menu";
+                return Result.myJSONResult(0,"登录成功");
             } else {
-                System.out.println("密码错误");
+                return Result.myJSONResult(1,"密码错误");
             }
         }
-        //依然在该界面
-        return "login";
     }
+
 
     /**
      * 前端界面传来用户注册信息封装的Staff对象。
@@ -57,17 +62,13 @@ public class StaffController {
      * @return
      */
     @RequestMapping("/register")
-    public String register(Staff staff){
+    @ResponseBody
+    public Object register(@RequestBody Staff staff){
         boolean isSucceess = staffService.register(staff);
         if(isSucceess == true ){
-            System.out.println("注册成功。");
-            //直接前往操作界面，或者登录界面
-            return"menu";
+            return Result.myJSONResult(0,"注册成功");
         }else{
-            System.out.println("注册失败");
-            //提示注册失败
-            //返回到注册界面
-            return "register";
+            return Result.myJSONResult(-1,"注册失败，账号ID已经存在");
         }
     }
 }

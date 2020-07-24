@@ -20,7 +20,7 @@ public class StaffServiceImpl implements StaffService {
     public Staff login(Staff staff) {
 
         StaffExample staffExample = new StaffExample();
-        staffExample.createCriteria().andSIdEqualTo(staff.getsId()).andPasswordEqualTo(staff.getPassword());
+        staffExample.createCriteria().andStaffidEqualTo(staff.getStaffid().trim());
         List<Staff> staff1 = staffMapper.selectByExample(staffExample);
         return(staff1.size()>0?staff1.get(0):null);
 
@@ -29,7 +29,7 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public boolean register(Staff staff) {
 
-        Staff staff1 = staffMapper.selectByPrimaryKey(staff.getsId());
+        Staff staff1 = staffMapper.selectByPrimaryKey(staff.getStaffid());
         if(staff1 != null){
             System.out.println("用户ID已存在,注册失败！");
             return false;

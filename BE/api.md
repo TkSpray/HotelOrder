@@ -164,93 +164,56 @@
 
 # 接口文档-凯
 
-## 员工接口
+- 1、用户登录
+- 2、用户注册
+- 3、酒店预订
+- 4、预订订单变为入住订单
+- 5、预订订单的取消
+- 5、退房订单的完成
 
-### 使用员工ID和密码登录
 
-登录成功进入主页面，失败给出提示
-再login页面提供action为“/login”的提交按钮
-
-@request
-
-```json
-{
-    URL: "/page/login"
-    param: {
-        sId : String, //员工ID
-        password : String  //密码
-    }
-}
-```
-
-@return
-
-```json
-{
-    status_code: Number,
-    msg: String				//操作成功或者出现异常  	
-}
-```
-
-### 员工账号注册
-
-填写员工基本信息和密码，将信息封装成Staff对象并传给后端。
-register ： 提交按钮
+## 用户登录
 
 @request
-提供action为“/register”的提交按钮
 
 ```json
 {
-    URL:  "/page/register"
+    contentType:"application/json",
+
     param:{
-            sId: String,         //id NOT NULL
-            sName: String ,      //NOT NULL
-            sGender: String,     //性别 //性别 IN ('男','女')
-            phone: String,
-            address: String,
-            eMail: String,
-            password: String ,   //NOT NULL
-            remarks: String     //备注，可以为null
+        staffid:String,  //用户ID
+        password:String  //密码
+    }
+}
+
+```
+@return
+
+```json
+{
+    param:{
+        code:int,       //0:登录成功，-1：账号错误，1：密码错误
+        message:String  //（登录成功，账号错误，密码错误）
     }
 }
 ```
 
-@return
-注册成功：
 
-```json
-{
-    status_code: Number,
-    msg: String				//操作成功或者出现异常  	
-}
-```
-
-## 酒店预定接口
-
-###客人信息登录
-
-填写客人基本信息。点击提交按钮后，传给后端数据。
-并跳转到房间筛选界面。
-submit : 提交按钮，转到筛选界面
+## 用户注册
 
 @request
 
 ```json
 {
-    URL: "/page/advance_Book/submit"
+    URL:"/register",
+
+    contentType:"application/json",
+
     param:{
-        gId: String,        //身份证号NOT NULL
-        gName: String,       //姓名NOT NULL
-        phone: String,       //电话
-  			tid: String
-  			ordertime:datetime,	  //预定时间
-				preintime:datetime,   //预计入住时间
-				intime:datetime,   	  //实际入住时间
-				preouttime:datetime,  //预计退房时间
-				outtime:datetime,	    //实际退房时间
-        total:String,         //总计时间
-        price:Number		      //总价
+            staffid:String, //员工注册ID
+            name:Strng,     //姓名
+            phone:String,   //电话
+            password:String //密码
     }
 }
 ```
@@ -259,7 +222,123 @@ submit : 提交按钮，转到筛选界面
 
 ```json
 {
-    URL:"page/selectRoom"   //进入房间筛选界面 ！！！
+    param:{
+        code:int,       //0-注册成功    -1-注册失败，账号ID已近存在
+        message:String  //提示信息
+    }
 }
 ```
 
+# 酒店预订模块
+
+- 客人预订
+
+@request
+
+```json
+{
+    URL:"/book",
+    contentType:"application/json",
+    param:{
+            guestid:String,        //身份证ID
+            name:String,           //姓名
+            phone:String,          //电话
+            roomid:String,         //房间ID
+            ordertime:Date,        //预订时间
+            preintime:Date,        //预计入住时间
+            preouttime:Date,       //预计退房时间
+            total: String          //住几晚
+    }
+}
+```
+
+@return
+
+```json
+{
+    param:{
+        code:int,       //0-预订成功    -1-失败
+        message:String  //提示信息
+    }
+}
+```
+
+- 预订变为入住订单
+
+@request
+
+```json
+{
+    URL:"/book_to_order",
+    contentType:"application/json",
+    param:{
+        orderid:int,
+        roomid:String,     //对应订单的房间ID
+        intime:Date,    //入住时间
+        price:int       //应付金额
+    }
+}
+```
+
+@return
+
+```json
+{
+    param:{
+        code:int,       //0-入住成功    -1-失败
+        message:String  //提示信息
+    }
+}
+```
+
+
+- 预订订单取消
+
+@request
+
+```json
+{
+    URL:"/cancelbook",
+
+    param:{
+            orderid:int,    //订单ID
+    }
+}
+```
+
+@return
+
+```json
+{
+    param:{
+        code:int,       //0-入住成功    -1-失败
+        message:String  //提示信息
+    }
+}
+```
+
+
+## 退房操作
+
+@request
+```json
+{
+    URL:"checkout",
+
+    param:{
+        orderid:int,        //订单ID
+        outtime:Date       //退房时间
+    }
+}
+```
+
+@return
+
+```json
+{
+    param:{
+        code:int,       //0-入住成功    -1-失败
+        message:String  //提示信息
+    }
+}
+```
