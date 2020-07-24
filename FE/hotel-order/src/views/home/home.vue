@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-container class="maincon">
+  <div class="home">
+    <el-container class="main-container" style="height:100%">
       <el-header style="background-color:rgba(255, 197, 0, 0.823529411764706)">
         <el-row :gutter="20" class="mainhead">
           <el-col :span="12" class="head1">
@@ -23,7 +23,7 @@
         </el-row>
       </el-header>
       <el-container>
-        <el-aside width="220px">
+        <el-aside width="220px" style="position:relative">
           <el-menu
             :default-active="this.$route.path"
             router
@@ -40,6 +40,7 @@
             router
             active-text-color="#c49800"
             @select="changeTitle"
+            class="leftnav"
           >
             <el-submenu index="1">
               <template slot="title">
@@ -99,10 +100,22 @@ export default {
       },
     }
   },
+  mounted() {
+    this.getJson()
+  },
   methods: {
     changeTitle(title) {
       let str = title.substring(6)
       this.title = str ? this.map[str] : '系统首页'
+    },
+    getJson() {
+      this.$axios({
+        url: '/roomlist.json',
+      }).then((res) => {
+        this.$store.commit('getRoomlist', JSON.parse(res.data).data)
+        let list = this.$store.state.roomlist
+        console.log('获取到的list: ', list)
+      })
     },
     // async logout() {
     //   document.cookie = ''
@@ -120,6 +133,9 @@ export default {
 </script>
 
 <style>
+.home {
+  height: 100%;
+}
 .tohome a {
   color: #000000;
   text-decoration: none;
@@ -192,5 +208,9 @@ export default {
 .header-font {
   padding-left: 30px;
   border-left: solid 5px rgba(26, 101, 188, 1);
+}
+
+.leftnav {
+  height: calc(100vh - 116px);
 }
 </style>

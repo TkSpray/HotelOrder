@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="index-image-wrapper">
     <div
       class="index-image"
       v-for="(value, key, index) in map"
@@ -44,6 +44,10 @@ export default {
 </script>
 
 <style>
+.index-image-wrapper {
+  max-width: 800px;
+  min-width: 650px;
+}
 .index-image {
   padding: 20px 0;
   padding-top: 40px;

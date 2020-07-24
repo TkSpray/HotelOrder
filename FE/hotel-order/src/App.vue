@@ -18,7 +18,8 @@
 }
 
 body,
-html {
+html,
+#app {
   margin: 0;
   height: 100%;
 }
