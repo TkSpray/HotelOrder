@@ -113,17 +113,18 @@
     URL: "/page/check_in",
     method: "POST",
     param：{
-            		gId: String,         //身份证号NOT NULL
-            		gName: String,       //姓名NOT NULL
+            		guestID: String,         //身份证号NOT NULL
+            		name: String,       //姓名NOT NULL
             		phone: String,       //电话
-    						tId: String,  		 //房间类型编号
-  							ordertime:datetime,	  //预定时间
-								preintime:datetime,   //预计入住时间
-								intime:datetime,   	  //实际入住时间
-								preouttime:datetime,  //预计退房时间
-								outtime:datetime,	    //实际退房时间
-        				total:String,         //总计时间
-        				price:Number		      //总价
+    				roomtype:Number,  		 //房间类型编号NOT NULL
+    				roomID:String			//房间号NOT NULL
+  					ordertime:datetime,	  //预定时间
+					preintime:datetime,   //预计入住时间
+					intime:datetime,   	  //实际入住时间
+					preouttime:datetime,  //预计退房时间
+					outtime:datetime,	    //实际退房时间
+        			total:Number,         //总计时间
+        			price:Number		      //总价
     }
 }
 ```
@@ -132,7 +133,7 @@
 
 ```json
 {
-  	status_code: Number,//200表示正常 操作成功 其他均表示出现异常
+  	status_code: Number,//0-成功，1-失败
     msg: String
 }
 ```
@@ -148,7 +149,7 @@
     URL: "/page/check_out",
     method: "POST",
     param: {
-        tId: String  		//房间类型编号
+        orderID: Number  		//订单编号NOT NULL
     }
 }
 ```
@@ -157,7 +158,7 @@
 
 ```json
 {
-  	status_code: Number,
+  	status_code: Number,	//0-成功，1-失败
     msg: String				//操作成功或者出现异常  	
 }
 ```
