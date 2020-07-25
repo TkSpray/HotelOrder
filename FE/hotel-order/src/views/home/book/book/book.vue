@@ -11,6 +11,7 @@
         label="房间号"
         prop="roomID"
         align="center"
+        sortable
       ></el-table-column>
       <el-table-column
         label="房间类型"
@@ -19,38 +20,45 @@
         :formatter="typeFormatter"
         :filters="roomtype"
         :filter-method="filterHandler"
+        sortable
       ></el-table-column>
       <el-table-column
         label="价格"
         prop="price"
         align="center"
+        sortable
       ></el-table-column>
       <el-table-column
         label="适合人数"
         prop="numofpeople"
         align="center"
+        sortable
       ></el-table-column>
       <el-table-column
         label="楼层"
         prop="floor"
         align="center"
+        sortable
       ></el-table-column>
       <el-table-column
         label="面积"
         prop="area"
         align="center"
+        sortable
       ></el-table-column>
       <el-table-column
         label="是否含早"
         prop="includebrk"
         align="center"
         :formatter="brkFormatter"
+        sortable
       ></el-table-column>
       <el-table-column
         label="状态"
         prop="status"
         align="center"
         :formatter="statusFormatter"
+        sortable
       ></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
