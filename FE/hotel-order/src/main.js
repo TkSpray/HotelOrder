@@ -16,7 +16,6 @@ Vue.prototype.$axios = axios.create({
   //请求前处理数据
   transformRequest: [
     function(data) {
-      console.log(data)
       data = qs.stringify(data)
       return data
     },
@@ -26,7 +25,6 @@ Vue.prototype.$axios = axios.create({
   //请求后的data处理
   transformResponse: [
     function(data) {
-      console.log(data)
       return data
     },
   ],

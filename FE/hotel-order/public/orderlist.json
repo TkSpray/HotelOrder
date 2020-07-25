@@ -1,0 +1,66 @@
+{
+  "status_code": 1,
+  "msg": "ok",
+  "data": [
+    {
+      "orderstatus": 1,
+      "name": "张三",
+      "phone": 13199999999,
+      "roomId": "101",
+      "roomtype": 1,
+      "ordertime": "2020 / 7 / 24",
+      "preintime": "2020 / 7 / 24",
+      "intime": "2020 / 7 / 24",
+      "preouttime": "2020 / 7 / 24",
+      "outtime": "2020 / 7 / 24",
+      "total": "3",
+      "price": 300,
+      "overtime": "2020 / 7 / 24"
+    },
+    {
+      "orderstatus": 1,
+      "name": "张三",
+      "phone": 13199999999,
+      "roomId": "101",
+      "roomtype": 1,
+      "ordertime": "2020 / 7 / 24",
+      "preintime": "2020 / 7 / 24",
+      "intime": "2020 / 7 / 24",
+      "preouttime": "2020 / 7 / 24",
+      "outtime": "2020 / 7 / 24",
+      "total": "3",
+      "price": 300,
+      "overtime": "2020 / 7 / 24"
+    },
+    {
+      "orderstatus": 1,
+      "name": "张三",
+      "phone": 13199999999,
+      "roomId": "101",
+      "roomtype": 1,
+      "ordertime": "2020 / 7 / 24",
+      "preintime": "2020 / 7 / 24",
+      "intime": "2020 / 7 / 24",
+      "preouttime": "2020 / 7 / 24",
+      "outtime": "2020 / 7 / 24",
+      "total": "3",
+      "price": 300,
+      "overtime": "2020 / 7 / 24"
+    },
+    {
+      "orderstatus": 1,
+      "name": "张三",
+      "phone": 13199999999,
+      "roomId": "101",
+      "roomtype": 1,
+      "ordertime": "2020 / 7 / 24",
+      "preintime": "2020 / 7 / 24",
+      "intime": "2020 / 7 / 24",
+      "preouttime": "2020 / 7 / 24",
+      "outtime": "2020 / 7 / 24",
+      "total": "3",
+      "price": 300,
+      "overtime": "2020 / 7 / 24"
+    }
+  ]
+}

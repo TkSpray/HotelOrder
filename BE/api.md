@@ -1,7 +1,7 @@
 # 接口文档-慧
 
 
-## 数据接口
+## 数据接口````
 
 ### 订单查询
 
@@ -22,19 +22,19 @@
     msg: String,
   	data: [
         {
-      		orderstatus: String,  //订单状态
+      		orderstatus: Number,  //订单状态   0-预订中 1-已入住 2-已完成（正常流程退房）3-已关闭（取消预订）
       		name: String, 		   //客户姓名
-					phone: String,		   //电话
-					roomId:String,		   //房间号
-					roomtype:String,	   //房间类型
-					ordertime:datetime,	  //预定时间
-					preintime:datetime,   //预计入住时间
-					intime:datetime,   	  //实际入住时间
-					preouttime:datetime,  //预计退房时间
-					outtime:datetime,	    //实际退房时间
-          total:String,         //总计时间
-          price:Number		      //总价
-					overtime:String,      //是否超时
+			phone: String,		   //电话
+			roomId:String,		   //房间号
+			roomtype:Number,	   //房间类型 0-特价房 1-标准间 2-大床房
+			ordertime:datetime,	   //预定时间 例：2020-7-1 20：34：21
+			preintime:datetime,   //预计入住时间  例：2020-7-2（具体到日期
+			intime:datetime,      //实际入住时间  例：2020-7-1 20：34：21
+			preouttime:datetime,  //预计退房时间  例：2020-7-4（具体到日期
+			outtime:datetime,     //实际退房时间  例：2020-7-1 20：34：21
+            total:Number,         //总计天数  例：2020-7-4减去2020-7-2 结果为2晚
+            price:Number	       //总价 房间价格乘以总计天数
+			overtime:boolean      //是否超时 比较preouttime和outtime
         }
         ...
     ]
@@ -63,13 +63,13 @@
   	data: [
         {
       		roomID: String, 	  //房间号
-      		roomtype: Number,	  //房间类型
-					price: Number,		  //价格
-					numofpeople:Number,	//适合人数
-					floor:Number,	      //楼层
-					area:String,	  	  //面积
-					includebrk:String,  //是否含早
-					status:String,   	  //状态
+      		roomtype: Number,	  //房间类型 0-特价房 1-标准间 2-大床房
+			price: Number,		  //价格
+			numofpeople:Number,	  //适合人数
+			floor:Number,	      //楼层
+			area:String,	  	  //面积
+			includebrk:boolean,   //是否含早
+			status:String  	      //房间状态 0-空闲 1-预订中 2-已入住
         }
         ...
     ]
@@ -113,17 +113,18 @@
     URL: "/page/check_in",
     method: "POST",
     param：{
-            		gId: String,         //身份证号NOT NULL
-            		gName: String,       //姓名NOT NULL
+            		guestID: String,         //身份证号NOT NULL
+            		name: String,       //姓名NOT NULL
             		phone: String,       //电话
-    						tId: String,  		 //房间类型编号
-  							ordertime:datetime,	  //预定时间
-								preintime:datetime,   //预计入住时间
-								intime:datetime,   	  //实际入住时间
-								preouttime:datetime,  //预计退房时间
-								outtime:datetime,	    //实际退房时间
-        				total:String,         //总计时间
-        				price:Number		      //总价
+    				roomtype:Number,  		 //房间类型编号NOT NULL
+    				roomID:String			//房间号NOT NULL
+  					ordertime:datetime,	  //预定时间
+					preintime:datetime,   //预计入住时间
+					intime:datetime,   	  //实际入住时间
+					preouttime:datetime,  //预计退房时间
+					outtime:datetime,	    //实际退房时间
+        			total:Number,         //总计时间
+        			price:Number		      //总价
     }
 }
 ```
@@ -132,7 +133,7 @@
 
 ```json
 {
-  	status_code: Number,//200表示正常 操作成功 其他均表示出现异常
+  	status_code: Number,//0-成功，1-失败
     msg: String
 }
 ```
@@ -148,7 +149,7 @@
     URL: "/page/check_out",
     method: "POST",
     param: {
-        tId: String  		//房间类型编号
+        orderID: Number  		//订单编号NOT NULL
     }
 }
 ```
@@ -157,7 +158,7 @@
 
 ```json
 {
-  	status_code: Number,
+  	status_code: Number,	//0-成功，1-失败
     msg: String				//操作成功或者出现异常  	
 }
 ```
