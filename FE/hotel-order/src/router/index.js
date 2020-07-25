@@ -1,59 +1,59 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    redirect: '/home',
+    path: "/",
+    redirect: "/home"
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/login/login.vue'),
+    path: "/login",
+    name: "Login",
+    component: () => import("../views/login/login.vue")
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: () => import('../views/home/home.vue'),
+    path: "/home",
+    name: "Home",
+    component: () => import("../views/home/home.vue"),
     children: [
       {
-        path: '/home',
-        component: () => import('../views/home/index/index.vue'),
+        path: "/home",
+        component: () => import("../views/home/index/index.vue")
       },
       {
-        path: '/home/book',
-        component: () => import('../views/home/book/book/book.vue'),
+        path: "/home/book",
+        component: () => import("../views/home/book/book/book.vue")
       },
       {
-        path: '/home/booklist',
-        component: () => import('../views/home/book/booklist/booklist.vue'),
+        path: "/home/booklist",
+        component: () => import("../views/home/book/booklist/booklist.vue")
       },
       {
-        path: '/home/checkin',
-        component: () => import('../views/home/checkin/checkin.vue'),
+        path: "/home/checkin",
+        component: () => import("../views/home/checkin/checkin.vue")
       },
       {
-        path: '/home/checkout',
-        component: () => import('../views/home/checkout/checkout.vue'),
+        path: "/home/checkout",
+        component: () => import("../views/home/checkout/checkout.vue")
       },
       {
-        path: '/home/orderlist',
-        component: () => import('../views/home/orderlist/orderlist.vue'),
+        path: "/home/orderlist",
+        component: () => import("../views/home/orderlist/orderlist.vue")
       },
       {
-        path: '/home/roomlist',
-        component: () => import('../views/home/roomlist/roomlist.vue'),
-      },
-    ],
-  },
-]
+        path: "/home/roomlist",
+        component: () => import("../views/home/roomlist/roomlist.vue")
+      }
+    ]
+  }
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes,
-})
+  routes
+});
 
-export default router
+export default router;

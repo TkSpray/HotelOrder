@@ -10,6 +10,7 @@
         label="房间类型"
         prop="roomtype"
         align="center"
+        :formatter="typeFormatter"
       ></el-table-column>
       <el-table-column
         label="价格"
@@ -35,20 +36,65 @@
         label="是否含早"
         prop="includebrk"
         align="center"
+        :formatter="brkFormatter"
       ></el-table-column>
       <el-table-column
         label="状态"
         prop="status"
         align="center"
+        :formatter="statusFormatter"
       ></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+          <el-button size="mini" @click="handle(scope.$index, scope.row)"
             >预订</el-button
           >
         </template>
       </el-table-column>
     </el-table>
+    <el-dialog
+      title="身份信息输入"
+      :visible.sync="dialogFormVisible"
+      width="550px"
+    >
+      <el-form :model="form">
+        <el-form-item label="姓名" :label-width="formLabelWidth">
+          <el-input
+            v-model="form.name"
+            autocomplete="off"
+            style="width:55%"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="电话" :label-width="formLabelWidth">
+          <el-input
+            v-model="form.phone"
+            autocomplete="off"
+            style="width:55%"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="身份证号" :label-width="formLabelWidth">
+          <el-input
+            v-model="form.guestid"
+            autocomplete="off"
+            style="width:55%"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="预计入住时间" :label-width="formLabelWidth">
+          <el-date-picker
+            v-model="date"
+            type="daterange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="confirmInf()">确 定</el-button>
+      </div>
+    </el-dialog>
   </section>
 </template>
 
@@ -57,24 +103,68 @@ export default {
   data() {
     return {
       map: {
-        roombook: '房间预订',
-        checkin: '来客入住',
-        checkout: '办理退房',
-        orderlist: '订单列表',
-        roomlist: '房间列表',
+        roombook: "房间预订",
+        checkin: "来客入住",
+        checkout: "办理退房",
+        orderlist: "订单列表",
+        roomlist: "房间列表"
       },
       roomlist: [],
-    }
+      dialogFormVisible: false,
+      formLabelWidth: "120px",
+      form: {
+        guestid: "",
+        name: "",
+        phone: "",
+        roomid: "",
+        ordertime: "",
+        preintime: "",
+        preouttime: "",
+        total: ""
+      },
+      date: [],
+      roomtype: ["特价房", "标准间", "大床房"],
+      breakfast: ["否", "是"],
+      roomstatus: ["空闲", "预订中", "已入住"]
+    };
   },
   mounted() {
-    this.roomlist = this.$store.state.roomlist
+    let list = this.$store.state.roomlist;
+    this.roomlist = list.filter(room => room.status == 0);
   },
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row)
+    confirmInf() {
+      // let nowData = new Date()
+      this.dialogFormVisible = false;
+      let days = (this.date[1] - this.date[0]) / (24 * 60 * 60 * 1000);
+      let start = this.formatDate(this.date[0]);
+      let end = this.formatDate(this.date[1]);
+
+      this.form.preintime = start;
+      this.form.preouttime = end;
+      this.form.total = days;
+      console.log(start, end, days);
     },
-  },
-}
+    handle(index) {
+      this.dialogFormVisible = true;
+      console.log(index);
+    },
+    formatDate(date) {
+      return (
+        date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+      );
+    },
+    typeFormatter(row) {
+      return this.roomtype[Number(row.roomtype)];
+    },
+    brkFormatter(row) {
+      return this.breakfast[Number(row.includebrk)];
+    },
+    statusFormatter(row) {
+      return this.roomstatus[Number(row.status)];
+    }
+  }
+};
 </script>
 
 <style>

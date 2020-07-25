@@ -1,17 +1,17 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    roomlist: [],
+    roomlist: []
   },
   mutations: {
     getRoomlist(state, list) {
-      state.roomlist = list
-    },
+      state.roomlist = list;
+    }
   },
   actions: {},
-  modules: {},
-})
+  modules: {}
+});

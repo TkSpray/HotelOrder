@@ -23,7 +23,7 @@
         </el-row>
       </el-header>
       <el-container>
-        <el-aside width="220px" style="position:relative">
+        <el-aside width="220px" style="position:relative;text-align:center">
           <el-menu
             :default-active="this.$route.path"
             router
@@ -88,35 +88,35 @@ export default {
   data() {
     return {
       pid: 0,
-      admin: '817号工作人员小花',
-      title: '系统首页',
+      admin: "817号工作人员小花",
+      title: "系统首页",
       map: {
-        book: '办理预订',
-        booklist: '预订列表',
-        checkin: '来客入住',
-        checkout: '办理退房',
-        orderlist: '订单列表',
-        roomlist: '房间列表',
-      },
-    }
+        book: "办理预订",
+        booklist: "预订列表",
+        checkin: "来客入住",
+        checkout: "办理退房",
+        orderlist: "订单列表",
+        roomlist: "房间列表"
+      }
+    };
   },
   mounted() {
-    this.getJson()
+    this.getJson();
   },
   methods: {
     changeTitle(title) {
-      let str = title.substring(6)
-      this.title = str ? this.map[str] : '系统首页'
+      let str = title.substring(6);
+      this.title = str ? this.map[str] : "系统首页";
     },
     getJson() {
       this.$axios({
-        url: '/roomlist.json',
-      }).then((res) => {
-        this.$store.commit('getRoomlist', JSON.parse(res.data).data)
-        let list = this.$store.state.roomlist
-        console.log('获取到的list: ', list)
-      })
-    },
+        url: "/roomlist.json"
+      }).then(res => {
+        this.$store.commit("getRoomlist", JSON.parse(res.data).data);
+        let list = this.$store.state.roomlist;
+        console.log("获取到的list: ", list);
+      });
+    }
     // async logout() {
     //   document.cookie = ''
     //   this.$store.commit('change_state', {
@@ -128,8 +128,8 @@ export default {
     //   } catch (e) {}
     //   this.$router.push('/login')
     // },
-  },
-}
+  }
+};
 </script>
 
 <style>

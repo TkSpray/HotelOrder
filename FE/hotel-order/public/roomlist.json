@@ -1,66 +1,66 @@
 {
-  "status_code": 1,
-  "msg": "ok",
-  "data": [
-    {
-      "roomID": "101",
-      "roomtype": 1,
-      "price": 100,
-      "numofpeople": 2,
-      "floor": 1,
-      "area": 50,
-      "includebrk": 1,
-      "status": 1
-    },
-    {
-      "roomID": "201",
-      "roomtype": 2,
-      "price": 200,
-      "numofpeople": 3,
-      "floor": 2,
-      "area": 50,
-      "includebrk": 1,
-      "status": 1
-    },
-    {
-      "roomID": "202",
-      "roomtype": 3,
-      "price": 200,
-      "numofpeople": 4,
-      "floor": 2,
-      "area": 50,
-      "includebrk": 1,
-      "status": 1
-    },
-    {
-      "roomID": "302",
-      "roomtype": 1,
-      "price": 150,
-      "numofpeople": 2,
-      "floor": 3,
-      "area": 50,
-      "includebrk": 1,
-      "status": 1
-    },
-    {
-      "roomID": "401",
-      "roomtype": 2,
-      "price": 100,
-      "numofpeople": 3,
-      "floor": 4,
-      "area": 50,
-      "includebrk": 1,
-      "status": 1
-    },
-    {
-      "roomID": "501",
-      "roomtype": 3,
-      "price": 100,
-      "numofpeople": 4,
-      "floor": 5,
-      "area": 50,
-      "includebrk": 1,
-      "status": 1
-    }
-  ]
+    "status_code": 1,
+    "msg": "ok",
+    "data": [
+        {
+            "roomID": "101",
+            "roomtype": 1,
+            "price": 100,
+            "numofpeople": 2,
+            "floor": 1,
+            "area": 50,
+            "includebrk": 1,
+            "status": 1
+        },
+        {
+            "roomID": "201",
+            "roomtype": 2,
+            "price": 200,
+            "numofpeople": 3,
+            "floor": 2,
+            "area": 50,
+            "includebrk": 0,
+            "status": 1
+        },
+        {
+            "roomID": "202",
+            "roomtype": 2,
+            "price": 200,
+            "numofpeople": 4,
+            "floor": 2,
+            "area": 50,
+            "includebrk": 1,
+            "status": 1
+        },
+        {
+            "roomID": "302",
+            "roomtype": 1,
+            "price": 150,
+            "numofpeople": 2,
+            "floor": 3,
+            "area": 50,
+            "includebrk": 1,
+            "status": 0
+        },
+        {
+            "roomID": "401",
+            "roomtype": 2,
+            "price": 100,
+            "numofpeople": 3,
+            "floor": 4,
+            "area": 50,
+            "includebrk": 0,
+            "status": 0
+        },
+        {
+            "roomID": "501",
+            "roomtype": 0,
+            "price": 100,
+            "numofpeople": 4,
+            "floor": 5,
+            "area": 50,
+            "includebrk": 1,
+            "status": 0
+        }
+    ]
 }

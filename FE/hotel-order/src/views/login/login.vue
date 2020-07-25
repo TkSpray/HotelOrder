@@ -36,22 +36,22 @@ export default {
   data() {
     return {
       formInline: {
-        user: '',
-        password: '',
-      },
-    }
+        user: "",
+        password: ""
+      }
+    };
   },
   methods: {
     onSubmit() {
-      console.log('submit!')
-    },
-  },
-}
+      console.log("submit!");
+    }
+  }
+};
 </script>
 
 <style>
 .login-bg {
-  background: url('../../assets/login/login-bg.jpg') no-repeat;
+  background: url("../../assets/login/login-bg.jpg") no-repeat;
   background-size: cover;
   height: 100vh;
   width: 100vw;
