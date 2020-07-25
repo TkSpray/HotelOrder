@@ -135,7 +135,7 @@ export default {
       return this.breakfast[Number(row.includebrk)];
     },
     statusFormatter(row) {
-      return this.roomstatus[Number(row.status)];
+      return this.roomstatus[Number(row.status)].text;
     },
     // 显示第几页
     handleCurrentChange(val) {
