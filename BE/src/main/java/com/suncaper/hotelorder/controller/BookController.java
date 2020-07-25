@@ -26,10 +26,17 @@ public class BookController {
     @RequestMapping("/book")
     @ResponseBody
     public Object book(@RequestBody Orders orders){
+        if(orders.getGuestid() == null || orders.getGuestid()==""
+            || orders.getName()== null || orders.getName() ==""
+            || orders.getPhone()==null || orders.getPhone() =="")
+            return Result.myJSONResult(-1,"请确认客人信息填写正确");
+        else if(orders.getRoomid() == null || orders.getRoomid() =="")
+            return Result.myJSONResult(-1,"选择房间");
+
         Boolean isSuccess = bookService.book(orders);
         if(isSuccess)
-            return Result.myJSONResult(0,"预定成功");
-        return Result.myJSONResult(-1,"预定失败");
+            return Result.myJSONResult(0,"预定订成功");
+        return Result.myJSONResult(-1,"预订失败");
     }
 
     /**

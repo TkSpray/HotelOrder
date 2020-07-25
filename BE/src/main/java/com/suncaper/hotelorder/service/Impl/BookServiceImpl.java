@@ -70,22 +70,39 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean bookToorder(Orders orders) {
-        //1、由房间号找到订单并修改状态
-        //因为ordrs对象里面已经设置了入住、金额信息
-        OrdersExample ordersExample = new OrdersExample();
-        ordersExample.createCriteria().andRoomidEqualTo(orders.getRoomid());
-        orders.setOrderstate(1);
-        ordersMapper.updateByExampleSelective(orders, ordersExample);
 
-        //2、修改房间状态
-        RoomExample roomExample = new RoomExample();
-        roomExample.createCriteria().andRoomidEqualTo(orders.getRoomid());
-        Room room = new Room();
-        room.setStatus(2);
+        if(orders.getRoomid() != null && orders.getRoomid() != "")
+        {
+            //1、由房间号找到订单并修改状态
+            //因为ordrs对象里面已经设置了入住、金额信息
+            OrdersExample ordersExample = new OrdersExample();
+            ordersExample.createCriteria().andRoomidEqualTo(orders.getRoomid());
+            orders.setOrderstate(1);
+            ordersMapper.updateByExampleSelective(orders, ordersExample);
 
-        roomMapper.updateByExampleSelective(room,roomExample);
+            //2、修改房间状态
+            RoomExample roomExample = new RoomExample();
+            roomExample.createCriteria().andRoomidEqualTo(orders.getRoomid());
+            Room room = new Room();
+            room.setStatus(2);
 
-        return true;
+            roomMapper.updateByExampleSelective(room,roomExample);
+
+            return true;
+        }
+
+        else if(orders.getOrderid() != null)
+        {
+            orders.setOrderstate(1);
+            ordersMapper.updateByPrimaryKeySelective(orders);
+            Orders orders1 = ordersMapper.selectByPrimaryKey(orders.getOrderid());
+            Room room = roomMapper.selectByPrimaryKey(orders1.getRoomid());
+            room.setStatus(2);
+            roomMapper.updateByPrimaryKeySelective(room);
+            return true;
+        }
+
+        return false;
     }
 
     /**

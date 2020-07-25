@@ -37,6 +37,13 @@ public class StaffController {
     @RequestMapping("/login")
     @ResponseBody
     public Object login(Staff staff) {
+        if(staff.getStaffid() == null || staff.getStaffid() == "")
+            return Result.myJSONResult(-1, "请输入账户ID");
+
+        else if (staff.getPassword() == null || staff.getPassword() == "")
+            return Result.myJSONResult(-1, "请输入密码");
+
+
         Staff staffInDB = staffService.login(staff);
         if (staffInDB == null) {
             return Result.myJSONResult(-1,"账号错误");
@@ -63,7 +70,14 @@ public class StaffController {
      */
     @RequestMapping("/register")
     @ResponseBody
-    public Object register(@RequestBody Staff staff){
+    public Object register(Staff staff){
+        if(staff.getStaffid() == null || staff.getStaffid() == "")
+            return Result.myJSONResult(-1,"账号为空");
+        if(staff.getPassword() == null || staff.getPassword() == "" )
+            return Result.myJSONResult(-1,"密码为空");
+        else if (staff.getPhone() == null || staff.getPhone() == "")
+            return Result.myJSONResult(-1, "手机号为空");
+
         boolean isSucceess = staffService.register(staff);
         if(isSucceess == true ){
             return Result.myJSONResult(0,"注册成功");
