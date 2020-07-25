@@ -1,6 +1,12 @@
 <template>
   <section class="section">
-    <el-table :data="roomlist" border style="width:100%">
+    <el-table
+      :data="
+        roomlist.slice((currentPage - 1) * PageSize, currentPage * PageSize)
+      "
+      border
+      style="width:100%"
+    >
       <el-table-column
         label="房间号"
         prop="roomID"
@@ -11,6 +17,8 @@
         prop="roomtype"
         align="center"
         :formatter="typeFormatter"
+        :filters="roomtype"
+        :filter-method="filterHandler"
       ></el-table-column>
       <el-table-column
         label="价格"
@@ -52,6 +60,15 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="PageSize"
+      layout="total, prev, pager, next"
+      :total="totalCount"
+      style="margin: 20px 0 0 30px;"
+    >
+    </el-pagination>
     <el-dialog
       title="身份信息输入"
       :visible.sync="dialogFormVisible"
@@ -123,14 +140,26 @@ export default {
         total: ""
       },
       date: [],
-      roomtype: ["特价房", "标准间", "大床房"],
+      roomtype: [
+        { text: "特价房", value: 0 },
+        { text: "标准间", value: 1 },
+        { text: "大床房", value: 2 }
+      ],
       breakfast: ["否", "是"],
-      roomstatus: ["空闲", "预订中", "已入住"]
+      roomstatus: ["空闲", "预订中", "已入住"],
+      selectType: "",
+      // 默认显示第几页
+      currentPage: 1,
+      // 总条数，根据接口获取数据长度(注意：这里不能为空)
+      totalCount: 1,
+      // 默认每页显示的条数（可修改）
+      PageSize: 10
     };
   },
   mounted() {
     let list = this.$store.state.roomlist;
     this.roomlist = list.filter(room => room.status == 0);
+    this.totalCount = this.roomlist.length;
   },
   methods: {
     confirmInf() {
@@ -145,9 +174,9 @@ export default {
       this.form.total = days;
       console.log(start, end, days);
     },
-    handle(index) {
+    handle(index, row) {
       this.dialogFormVisible = true;
-      console.log(index);
+      console.log(index, row);
     },
     formatDate(date) {
       return (
@@ -155,13 +184,22 @@ export default {
       );
     },
     typeFormatter(row) {
-      return this.roomtype[Number(row.roomtype)];
+      return this.roomtype[Number(row.roomtype)].text;
     },
     brkFormatter(row) {
       return this.breakfast[Number(row.includebrk)];
     },
     statusFormatter(row) {
       return this.roomstatus[Number(row.status)];
+    },
+    // 显示第几页
+    handleCurrentChange(val) {
+      // 改变默认的页数
+      this.currentPage = val;
+    },
+    filterHandler(value, row, column) {
+      const property = column["property"];
+      return row[property] === value;
     }
   }
 };
