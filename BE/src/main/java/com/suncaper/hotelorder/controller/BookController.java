@@ -35,7 +35,7 @@ public class BookController {
 
         Boolean isSuccess = bookService.book(orders);
         if(isSuccess)
-            return Result.myJSONResult(0,"预定订成功");
+            return Result.myJSONResult(0,"预订成功");
         return Result.myJSONResult(-1,"预订失败");
     }
 

@@ -7,6 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * room类状态：
+ * 房间
+ * 0 空闲
+ * 1 预订中
+ * 2 已入住
+ */
+
 public class CheckinController {
     @Autowired
     CheckinService checkService;
@@ -15,10 +23,18 @@ public class CheckinController {
     @RequestMapping("/check_in")
     @ResponseBody
     public Object Checkin(Orders order){
-        if(checkService.CheckIn(order) == true){
+        if(checkService.orderID_error(order) == true){
+            return Result.myJSONResult(1,"订单号错误!");
+        }
+        if(checkService.roomID_error(order) == true){
+            return Result.myJSONResult(1,"房间号不存在！");
+        }
+        if(checkService.room_available(order) == 0){
             return Result.myJSONResult(0,"入住成功");
-        }else {
-            return Result.myJSONResult(1,"入住成功");
+        }else if (checkService.room_available(order) == 1){
+            return Result.myJSONResult(1,"房间已被预订！");
+        }else{
+            return Result.myJSONResult(2,"房间有人入住！");
         }
     }
 }
