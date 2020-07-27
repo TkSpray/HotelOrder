@@ -101,20 +101,30 @@ export default {
     };
   },
   mounted() {
-    this.getJson();
+    this.getRoom();
+    this.getOrder();
   },
   methods: {
     changeTitle(title) {
       let str = title.substring(6);
       this.title = str ? this.map[str] : "系统首页";
     },
-    getJson() {
+    getRoom() {
       this.$axios({
         url: "/roomlist.json"
       }).then(res => {
         this.$store.commit("getRoomlist", JSON.parse(res.data).data);
         let list = this.$store.state.roomlist;
-        console.log("获取到的list: ", list);
+        console.log("获取到的roomlist: ", list);
+      });
+    },
+    getOrder() {
+      this.$axios({
+        url: "/orderlist.json"
+      }).then(res => {
+        this.$store.commit("getOrderlist", JSON.parse(res.data).data);
+        let list = this.$store.state.orderlist;
+        console.log("获取到的orderlist: ", list);
       });
     }
     // async logout() {
