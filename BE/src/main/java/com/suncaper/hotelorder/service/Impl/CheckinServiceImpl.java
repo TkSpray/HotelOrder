@@ -6,6 +6,7 @@ import com.suncaper.hotelorder.mapper.OrdersMapper;
 import com.suncaper.hotelorder.mapper.RoomMapper;
 import com.suncaper.hotelorder.service.CheckinService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * room类状态：
@@ -14,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 1 预订中
  * 2 已入住
  */
-
+@Service
 public class CheckinServiceImpl implements CheckinService {
 
     @Autowired

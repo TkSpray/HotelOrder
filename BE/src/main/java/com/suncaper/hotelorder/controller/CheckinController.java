@@ -4,6 +4,7 @@ import com.suncaper.hotelorder.common.utils.Result;
 import com.suncaper.hotelorder.domain.Orders;
 import com.suncaper.hotelorder.service.CheckinService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 2 已入住
  */
 
+@Controller
 public class CheckinController {
     @Autowired
     CheckinService checkService;

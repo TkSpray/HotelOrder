@@ -4,16 +4,16 @@ package com.suncaper.hotelorder.controller;
 import com.suncaper.hotelorder.common.utils.Result;
 import com.suncaper.hotelorder.domain.Orders;
 import com.suncaper.hotelorder.mapper.OrdersMapper;
+import com.suncaper.hotelorder.mapper.RoomMapper;
 import com.suncaper.hotelorder.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Book;
 import java.util.Date;
 
+@Controller
 public class BookController {
 
     @Autowired
@@ -22,21 +22,25 @@ public class BookController {
     @Autowired
     OrdersMapper ordersMapper;
 
+    @Autowired
+    RoomMapper roomMapper;
 
-    @RequestMapping("/book")
+    @GetMapping("/book")
     @ResponseBody
-    public Object book(@RequestBody Orders orders){
+    public Object book(Orders orders){
         if(orders.getGuestid() == null || orders.getGuestid()==""
             || orders.getName()== null || orders.getName() ==""
             || orders.getPhone()==null || orders.getPhone() =="")
             return Result.myJSONResult(-1,"请确认客人信息填写正确");
         else if(orders.getRoomid() == null || orders.getRoomid() =="")
             return Result.myJSONResult(-1,"选择房间");
+        if(roomMapper.selectByPrimaryKey(orders.getRoomid())== null)
+            return Result.myJSONResult(-1,"房间不存在");
 
         Boolean isSuccess = bookService.book(orders);
         if(isSuccess)
             return Result.myJSONResult(0,"预订成功");
-        return Result.myJSONResult(-1,"预订失败");
+        return Result.myJSONResult(-1,"预订失败,房间已经被预订或出租");
     }
 
     /**
@@ -49,7 +53,7 @@ public class BookController {
      */
     @RequestMapping("/book_to_order")
     @ResponseBody
-    public Object bookToorder(@RequestBody Orders orders){
+    public Object bookToorder(Orders orders){
         Boolean isSuccess = bookService.bookToorder(orders);
         if(isSuccess)
             return Result.myJSONResult(0, "入住成功");
@@ -67,6 +71,8 @@ public class BookController {
     @RequestMapping("/canclebook")
     @ResponseBody
     public Object canclebook(int orderid){
+//        if(orderid == null || orderid == "")
+//            return Result.myJSONResult(-1, "请选择订单");
         Boolean isSuccess = bookService.canclebook(orderid);
         if(isSuccess)
             return Result.myJSONResult(0,"取消预订成功");

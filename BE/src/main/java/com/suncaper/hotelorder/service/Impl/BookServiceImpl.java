@@ -48,15 +48,22 @@ public class BookServiceImpl implements BookService {
     public boolean book(Orders orders) {
         //设置订单状态并插入
         orders.setOrderstate(0);
-        ordersMapper.insertSelective(orders);
+
         //找到房间信息
         RoomExample roomExample = new RoomExample();
         roomExample.createCriteria().andRoomidEqualTo(orders.getRoomid());
         Room room = roomMapper.selectByPrimaryKey(orders.getRoomid());
-        //修改房间状态，并插入
-        room.setStatus(1);
-        roomMapper.updateByExampleSelective(room,roomExample);
-        return true;
+        //房间空闲时才能执行
+        if(room.getStatus() == 0){
+            orders.setRoomtype(room.getRoomtype());
+            ordersMapper.insertSelective(orders);
+            //修改房间状态，并插入
+            room.setStatus(1);
+            roomMapper.updateByExampleSelective(room,roomExample);
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -94,10 +101,15 @@ public class BookServiceImpl implements BookService {
         else if(orders.getOrderid() != null)
         {
             orders.setOrderstate(1);
-            ordersMapper.updateByPrimaryKeySelective(orders);
+            OrdersExample ordersExample = new OrdersExample();
+            ordersExample.createCriteria().andOrderidEqualTo(orders.getOrderid());
+
+
             Orders orders1 = ordersMapper.selectByPrimaryKey(orders.getOrderid());
             Room room = roomMapper.selectByPrimaryKey(orders1.getRoomid());
             room.setStatus(2);
+            orders.setRoomid(room.getRoomid());
+            ordersMapper.updateByExampleSelective(orders,ordersExample);
             roomMapper.updateByPrimaryKeySelective(room);
             return true;
         }
@@ -120,6 +132,9 @@ public class BookServiceImpl implements BookService {
         ordersExample.createCriteria().andOrderidEqualTo(orderid);
 
         Orders orders = ordersMapper.selectByPrimaryKey(orderid);
+        if(orders == null)
+            return false;
+
         orders.setOrderstate(3);
         //更新订单
         ordersMapper.updateByExampleSelective(orders,ordersExample);
