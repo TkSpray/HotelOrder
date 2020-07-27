@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 2 已入住
  */
 
+/**
+ * 返回状态：
+ * 0 成功
+ * 1 失败
+ */
+
 @Controller
 public class CheckinController {
     @Autowired
@@ -36,7 +42,7 @@ public class CheckinController {
         }else if (checkService.room_available(order) == 1){
             return Result.myJSONResult(1,"房间已被预订！");
         }else{
-            return Result.myJSONResult(2,"房间有人入住！");
+            return Result.myJSONResult(1,"房间有人入住！");
         }
     }
 }

@@ -15,6 +15,12 @@ import org.springframework.stereotype.Service;
  * 1 预订中
  * 2 已入住
  */
+
+/**
+ * 返回状态：
+ * 0 成功
+ * 1 失败
+ */
 @Service
 public class CheckinServiceImpl implements CheckinService {
 
