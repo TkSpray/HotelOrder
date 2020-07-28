@@ -2,6 +2,8 @@ package com.suncaper.hotelorder.service;
 
 import com.suncaper.hotelorder.domain.Orders;
 
+import java.text.ParseException;
+
 public interface CheckinService {
     int room_available(Orders order);
 
@@ -9,5 +11,5 @@ public interface CheckinService {
 
     public boolean roomID_error(Orders orders);
 
-    public void checkin(Orders order);
+    public void checkin(Orders order) throws ParseException;
 }

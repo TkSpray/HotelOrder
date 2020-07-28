@@ -9,6 +9,7 @@ import com.suncaper.hotelorder.service.CheckinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -68,15 +69,15 @@ public class CheckinServiceImpl implements CheckinService {
     }
 
     @Override
-    public void checkin(Orders order){
+    public void checkin(Orders order) throws ParseException {
         order.setOrderstate(1);
         RoomExample roomExample = new RoomExample();
         roomExample.createCriteria().andRoomidEqualTo(order.getRoomid());
         Room room = roomMapper.selectByPrimaryKey(order.getRoomid());
-  //      SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 
         order.setRoomtype(room.getRoomtype());
-  //      order.setIntime(df.format(new Date()));
+        order.setIntime(df.parse(String.valueOf(new Date())));
         ordersMapper.insertSelective(order);
 
         room.setStatus(2);
