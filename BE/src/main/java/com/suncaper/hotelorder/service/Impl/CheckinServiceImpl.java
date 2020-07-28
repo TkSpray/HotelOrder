@@ -2,11 +2,15 @@ package com.suncaper.hotelorder.service.Impl;
 
 import com.suncaper.hotelorder.domain.Orders;
 import com.suncaper.hotelorder.domain.Room;
+import com.suncaper.hotelorder.domain.RoomExample;
 import com.suncaper.hotelorder.mapper.OrdersMapper;
 import com.suncaper.hotelorder.mapper.RoomMapper;
 import com.suncaper.hotelorder.service.CheckinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * room类状态：
@@ -61,6 +65,22 @@ public class CheckinServiceImpl implements CheckinService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void checkin(Orders order){
+        order.setOrderstate(1);
+        RoomExample roomExample = new RoomExample();
+        roomExample.createCriteria().andRoomidEqualTo(order.getRoomid());
+        Room room = roomMapper.selectByPrimaryKey(order.getRoomid());
+  //      SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+
+        order.setRoomtype(room.getRoomtype());
+  //      order.setIntime(df.format(new Date()));
+        ordersMapper.insertSelective(order);
+
+        room.setStatus(2);
+        roomMapper.updateByExampleSelective(room,roomExample);
     }
 
 

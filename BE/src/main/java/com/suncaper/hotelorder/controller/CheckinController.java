@@ -38,6 +38,7 @@ public class CheckinController {
             return Result.myJSONResult(1,"房间号不存在！");
         }
         if(checkService.room_available(order) == 0){
+            checkService.checkin(order);
             return Result.myJSONResult(0,"入住成功");
         }else if (checkService.room_available(order) == 1){
             return Result.myJSONResult(1,"房间已被预订！");

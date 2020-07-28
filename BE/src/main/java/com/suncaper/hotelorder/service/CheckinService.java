@@ -8,4 +8,6 @@ public interface CheckinService {
     public boolean orderID_error (Orders order);
 
     public boolean roomID_error(Orders orders);
+
+    public void checkin(Orders order);
 }
