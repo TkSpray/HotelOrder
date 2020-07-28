@@ -10,16 +10,16 @@ const routes = [
   },
   {
     path: "/login",
-    name: "Login",
+    name: "hogin",
     component: () => import("../views/login/login.vue")
   },
   {
     path: "/home",
-    name: "Home",
     component: () => import("../views/home/home.vue"),
     children: [
       {
-        path: "/home",
+        path: "/",
+        name: "home",
         component: () => import("../views/home/index/index.vue")
       },
       {

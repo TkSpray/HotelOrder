@@ -7,7 +7,7 @@
           STAR酒店前台管理系统
         </h1>
       </header>
-      <el-form :inline="true" :model="formInline" class="demo-form-inline">
+      <el-form :inline="true" :model="formInline" class="form-inline">
         <el-form-item>
           <el-input
             v-model="formInline.user"
@@ -24,7 +24,11 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <img src="../../assets/login/login.svg" class="login-img" />
+          <img
+            src="../../assets/login/login.svg"
+            class="login-img"
+            @click="onSubmit"
+          />
         </el-form-item>
       </el-form>
     </div>
@@ -43,7 +47,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("submit!");
+      this.$router.push({ name: "home" });
     }
   }
 };
@@ -57,13 +61,21 @@ export default {
   width: 100vw;
   margin: 0;
   overflow: hidden;
+  position: relative;
 }
 .login-wrap {
-  margin-top: 30vh;
+  position: absolute;
   background-color: rgba(0, 0, 0, 0.498039215686275);
   color: #ffffff;
-  height: 40vh;
+  height: 240px;
   overflow: hidden;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.form-inline {
+  width: 460px;
+  margin: 0 auto;
 }
 .login-header {
   display: flex;
@@ -80,5 +92,6 @@ export default {
 }
 .login-img {
   height: 40px;
+  cursor: pointer;
 }
 </style>
