@@ -74,10 +74,7 @@ public class CheckinServiceImpl implements CheckinService {
         RoomExample roomExample = new RoomExample();
         roomExample.createCriteria().andRoomidEqualTo(order.getRoomid());
         Room room = roomMapper.selectByPrimaryKey(order.getRoomid());
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 
-        order.setRoomtype(room.getRoomtype());
-        order.setIntime(df.parse(String.valueOf(new Date())));
         ordersMapper.insertSelective(order);
 
         room.setStatus(2);
