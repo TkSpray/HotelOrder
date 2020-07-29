@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
+
 /**
  * room类状态：
  * 房间
@@ -30,7 +32,7 @@ public class CheckinController {
 
     @RequestMapping("/check_in")
     @ResponseBody
-    public Object Checkin(Orders order){
+    public Object Checkin(Orders order) throws ParseException {
         if(checkService.orderID_error(order) == true){
             return Result.myJSONResult(1,"订单号错误!");
         }

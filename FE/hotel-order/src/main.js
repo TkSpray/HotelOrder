@@ -12,7 +12,7 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 Vue.prototype.$axios = axios.create({
-  baseURL: "",
+  baseURL: "http://127.0.0.1:8080",
   //请求前处理数据
   transformRequest: [
     function(data) {
