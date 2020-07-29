@@ -64,3 +64,8 @@ create table staff
 alter table orders add constraint FK_Reference_1 foreign key (roomID)
       references room (roomID) on delete restrict on update restrict;
 
+INSERT staff(staffID, NAME, phone, PASSWORD)
+VALUES('admin', 'aaa', 123, 'admin'),('staff', 'aaa', 321, 'staff');
+
+INSERT room(roomID, roomtype, price, numberofpeople, FLOOR, AREA, includebrk, STATUS)
+VALUES(101, 1, 100, 4, 1, 80, 1, 0),(102, 2, 120, 2, 1, 80, 1, 0);
