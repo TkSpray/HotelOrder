@@ -2,33 +2,17 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import qs from "qs";
-import axios from "axios";
+import getList from "./plugin/getdata";
 
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 
+import "./axios";
+
 Vue.use(ElementUI);
+Vue.use(getList);
 
 Vue.config.productionTip = false;
-Vue.prototype.$axios = axios.create({
-  baseURL: "http://127.0.0.1:8080",
-  //请求前处理数据
-  transformRequest: [
-    function(data) {
-      data = qs.stringify(data);
-      return data;
-    }
-  ],
-  //请求等待超时时间则中断
-  timeout: 1500,
-  //请求后的data处理
-  transformResponse: [
-    function(data) {
-      return data;
-    }
-  ]
-});
 
 new Vue({
   router,

@@ -9,7 +9,7 @@
     >
       <el-table-column
         label="房间号"
-        prop="roomID"
+        prop="roomid"
         align="center"
         sortable
         width="100"
@@ -31,7 +31,7 @@
       ></el-table-column>
       <el-table-column
         label="适合人数"
-        prop="numofpeople"
+        prop="numberofpeople"
         align="center"
       ></el-table-column>
       <el-table-column
@@ -67,7 +67,7 @@
       <el-table-column label="操作" align="center" v-if="type">
         <template slot-scope="scope">
           <el-button size="mini" @click="handle(scope.$index, scope.row)">{{
-            type == 1 ? "预订" : "办理"
+            type == 1 ? "预订" : "入住"
           }}</el-button>
         </template>
       </el-table-column>
@@ -76,7 +76,7 @@
       @current-change="handleCurrentChange"
       :current-page="currentPage"
       :page-size="PageSize"
-      layout="total, prev, pager, next"
+      layout="prev, pager, next,jumper"
       :total="totalCount"
       style="margin: 20px 0 0 30px;"
     >
@@ -109,7 +109,11 @@
             style="width:55%"
           ></el-input>
         </el-form-item>
-        <el-form-item label="预计入住时间" :label-width="formLabelWidth">
+        <el-form-item
+          label="预计入住时间"
+          :label-width="formLabelWidth"
+          v-if="type == 1"
+        >
           <el-date-picker
             v-model="date"
             type="daterange"
@@ -193,7 +197,7 @@ export default {
   methods: {
     handle(index, row) {
       this.dialogFormVisible = true;
-      this.form.roomid = row.roomID;
+      this.form.roomid = row.roomid;
       console.log(index, row);
     },
     tableFormatter(row, col) {
@@ -222,25 +226,34 @@ export default {
       );
     },
     confirmInfo() {
-      const nowData = new Date();
-      this.dialogFormVisible = false;
-      let days = (this.date[1] - this.date[0]) / (24 * 60 * 60 * 1000);
-      let start = this.formatDate(this.date[0]);
-      let end = this.formatDate(this.date[1]);
+      if (this.type == 1) {
+        const nowData = new Date();
+        this.dialogFormVisible = false;
+        let days = (this.date[1] - this.date[0]) / (24 * 60 * 60 * 1000);
+        this.form.ordertime =
+          this.formatDate(nowData) + " " + this.formatTime(nowData);
 
-      this.form.ordertime =
-        this.formatDate(nowData) + " " + this.formatTime(nowData);
-      this.form.preintime = start;
-      this.form.preouttime = end;
-      this.form.total = days;
-      console.log(start, end, days, this.form);
+        let start = this.formatDate(this.date[0]);
+        let end = this.formatDate(this.date[1]);
+
+        this.form.preintime = start + " 12:00:00";
+        this.form.preouttime = end + " 12:00:00";
+        this.form.total = days;
+        console.log(this.form);
+        this.$axios({
+          url: "/book",
+          data: this.form
+        }).then(res => {
+          console.log(res);
+          this.$store.dispatch("getOrderList");
+          this.$store.dispatch("getRoomList");
+        });
+      } else if (this.type == 2) {
+        console.log(this.form);
+      }
     }
   }
 };
 </script>
 
-<style>
-.section {
-  padding: 20px;
-}
-</style>
+<style></style>

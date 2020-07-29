@@ -101,43 +101,34 @@ export default {
     };
   },
   mounted() {
-    this.getRoom();
-    this.getOrder();
+    // this.getRoom();
+    // this.getOrder();
+    this.$store.dispatch("getOrderlist");
+    this.$store.dispatch("getRoomlist");
   },
   methods: {
     changeTitle(title) {
       let str = title.substring(6);
       this.title = str ? this.map[str] : "系统首页";
-    },
-    getRoom() {
-      this.$axios({
-        url: "/roomlist.json"
-      }).then(res => {
-        this.$store.commit("getRoomlist", JSON.parse(res.data).data);
-        let list = this.$store.state.roomlist;
-        console.log("获取到的roomlist: ", list);
-      });
-    },
-    getOrder() {
-      this.$axios({
-        url: "/orderlist.json"
-      }).then(res => {
-        this.$store.commit("getOrderlist", JSON.parse(res.data).data);
-        let list = this.$store.state.orderlist;
-        console.log("获取到的orderlist: ", list);
-      });
     }
-    // async logout() {
-    //   document.cookie = ''
-    //   this.$store.commit('change_state', {
-    //     logined: false,
-    //     type: 0,
-    //   })
-    //   try {
-    //     await api.user.logout()
-    //   } catch (e) {}
-    //   this.$router.push('/login')
+    // getRoom() {
+    //   this.$axios({
+    //     url: "/page/room_list"
+    //   }).then(res => {
+    //     this.$store.commit("getRoomlist", JSON.parse(res.data).data);
+    //     let list = this.$store.state.roomlist;
+    //     console.log("获取到的roomlist: ", list);
+    //   });
     // },
+    // getOrder() {
+    //   this.$axios({
+    //     url: "/page/order_list"
+    //   }).then(res => {
+    //     this.$store.commit("getOrderlist", JSON.parse(res.data).data);
+    //     let list = this.$store.state.orderlist;
+    //     console.log("获取到的orderlist: ", list);
+    //   });
+    // }
   }
 };
 </script>
