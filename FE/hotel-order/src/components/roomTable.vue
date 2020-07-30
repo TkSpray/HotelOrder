@@ -245,8 +245,8 @@ export default {
           data: this.form
         }).then(res => {
           console.log(res);
-          this.$store.dispatch("getOrderList");
-          this.$store.dispatch("getRoomList");
+          this.$store.dispatch("getOrderlist");
+          this.$store.dispatch("getRoomlist");
         });
       } else if (this.type == 2) {
         console.log(this.form);
