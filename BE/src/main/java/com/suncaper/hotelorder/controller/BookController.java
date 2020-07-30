@@ -68,7 +68,7 @@ public class BookController {
      * @param orderid
      * @return
      */
-    @RequestMapping("/canclebook")
+    @RequestMapping("/cancelbook")
     @ResponseBody
     public Object canclebook(int orderid){
 //        if(orderid == null || orderid == "")
