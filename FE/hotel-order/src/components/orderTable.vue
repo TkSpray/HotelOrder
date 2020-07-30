@@ -183,7 +183,8 @@ export default {
       orderstate: [
         { text: "预订中", value: 0 },
         { text: "已入住", value: 1 },
-        { text: "已完成", value: 2 }
+        { text: "已完成", value: 2 },
+        { text: "已关闭", value: 3 }
       ],
       // 默认显示第几页
       currentPage: 1,
@@ -270,6 +271,8 @@ export default {
           }
         }).then(res => {
           if (res.data.code == 0) {
+            this.$store.dispatch("getOrderlist");
+            this.$store.dispatch("getRoomlist");
             this.$message({
               type: "success",
               message: "取消预订成功!"

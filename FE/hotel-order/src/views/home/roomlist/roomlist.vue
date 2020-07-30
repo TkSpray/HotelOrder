@@ -22,14 +22,14 @@ export default {
         { text: "空闲", value: 0 },
         { text: "预订中", value: 1 },
         { text: "已入住", value: 2 }
-      ],
-      roomlist: []
+      ]
     };
   },
-  mounted() {
-    this.roomlist = this.$store.state.roomlist;
-  },
-  methods: {}
+  computed: {
+    roomlist() {
+      return this.$store.state.roomlist;
+    }
+  }
 };
 </script>
 

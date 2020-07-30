@@ -246,7 +246,7 @@ export default {
         console.log(this.form);
         this.$axios({
           url: "/book",
-          data: this.form
+          params: this.form
         }).then(res => {
           if (res.data.code == 0) {
             this.$message({

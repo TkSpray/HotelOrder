@@ -12,15 +12,12 @@ export default {
     orderTable
   },
   data() {
-    return {
-      orderlist: [],
-      alllist: []
-    };
+    return {};
   },
-  mounted() {
-    this.orderlist = this.$store.state.orderlist.filter(
-      order => order.orderstate == 1
-    );
+  computed: {
+    orderlist() {
+      return this.$store.state.orderlist.filter(order => order.orderstate == 1);
+    }
   },
   methods: {}
 };

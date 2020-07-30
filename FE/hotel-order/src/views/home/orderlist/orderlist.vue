@@ -34,15 +34,18 @@ export default {
   },
   data() {
     return {
-      alllist: [],
       orderlist: [],
       searchData: "",
       searchType: "name"
     };
   },
-  created() {
-    this.alllist = this.$store.state.orderlist;
+  mounted() {
     this.orderlist = this.alllist;
+  },
+  computed: {
+    alllist() {
+      return this.$store.state.orderlist;
+    }
   },
   methods: {
     search() {

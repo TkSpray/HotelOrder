@@ -11,14 +11,13 @@ export default {
     roomTable
   },
   data() {
-    return {
-      roomlist: []
-    };
+    return {};
   },
-  mounted() {
-    this.roomlist = this.$store.state.roomlist.filter(room => room.status == 0);
-  },
-  methods: {}
+  computed: {
+    roomlist() {
+      return this.$store.state.roomlist.filter(room => room.status == 0);
+    }
+  }
 };
 </script>
 
