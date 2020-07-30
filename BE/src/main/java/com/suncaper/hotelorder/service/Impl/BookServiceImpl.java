@@ -162,9 +162,7 @@ public class BookServiceImpl implements BookService {
         Orders orders = ordersMapper.selectByPrimaryKey(orderid);
         orders.setOuttime(outtime);
 
-        Date nowtime = new Date();
-
-        if(nowtime.compareTo(orders.getPreouttime()) > 0){          //超时
+        if(outtime.compareTo(orders.getPreouttime()) > 0){          //超时
             orders.setOvertime(true);
         }else{                                                      //未超时
             orders.setOvertime(false);

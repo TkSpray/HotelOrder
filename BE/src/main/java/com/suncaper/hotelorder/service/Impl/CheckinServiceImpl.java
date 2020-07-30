@@ -69,7 +69,7 @@ public class CheckinServiceImpl implements CheckinService {
     }
 
     @Override
-    public void checkin(Orders order) throws ParseException {
+    public void checkin(Orders order) {
         order.setOrderstate(1);
         RoomExample roomExample = new RoomExample();
         roomExample.createCriteria().andRoomidEqualTo(order.getRoomid());
