@@ -9,10 +9,10 @@
     >
       <el-table-column
         label="订单状态"
-        prop="orderstatus"
+        prop="orderstate"
         align="center"
         :formatter="tableFormatter"
-        :filters="orderstatus"
+        :filters="orderstate"
         :filter-method="filterHandler"
         width="100"
         v-if="!type"
@@ -36,7 +36,7 @@
       ></el-table-column>
       <el-table-column
         label="房间号"
-        prop="roomId"
+        prop="roomid"
         align="center"
         sortable
         width="100"
@@ -54,6 +54,7 @@
         prop="ordertime"
         align="center"
         width="170"
+        :formatter="timeFormatter"
         v-if="type != 1"
       ></el-table-column>
       <el-table-column
@@ -68,6 +69,7 @@
         label="入住时间"
         prop="intime"
         align="center"
+        :formatter="timeFormatter"
         width="170"
         v-if="type != 2"
       ></el-table-column>
@@ -84,6 +86,7 @@
         align="center"
         width="170"
         v-if="!type"
+        :formatter="timeFormatter"
       ></el-table-column>
       <el-table-column
         label="是否超时"
@@ -177,7 +180,7 @@ export default {
         { text: "否", value: 0 },
         { text: "是", value: 1 }
       ],
-      orderstatus: [
+      orderstate: [
         { text: "预订中", value: 0 },
         { text: "已入住", value: 1 },
         { text: "已完成", value: 2 }
@@ -197,25 +200,78 @@ export default {
   methods: {
     checkout(index, row) {
       console.log(index, row);
+      this.$confirm("确认退房?", "确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "info"
+      }).then(() => {
+        this.$axios({
+          url: "/checkout",
+          data: {}
+        }).then(res => {
+          this.$message({
+            type: "success",
+            message: "退房成功!"
+          });
+          console.log(res);
+        });
+      });
     },
     checkin(index, row) {
       console.log(index, row);
+      this.$confirm("确认入住?", "确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "info"
+      }).then(() => {
+        this.$axios({
+          url: "/book_to_order",
+          data: {}
+        }).then(res => {
+          this.$message({
+            type: "success",
+            message: "入住成功!"
+          });
+          console.log(res);
+        });
+      });
     },
     cancelBook(index, row) {
       console.log(index, row);
+      this.$confirm("取消预订?", "确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "info"
+      }).then(() => {
+        this.$axios({
+          url: "/cancelbook",
+          data: {}
+        }).then(res => {
+          this.$message({
+            type: "success",
+            message: "取消预订成功!"
+          });
+          console.log(res);
+        });
+      });
     },
     tableFormatter(row, col) {
-      return this[col.property][Number(row[col.property])].text;
+      if (this[col.property][Number(row[col.property])])
+        return this[col.property][Number(row[col.property])].text;
+      else return "/";
     },
 
     totalFormatter(row, col) {
-      return row[col.property] + "晚";
+      if (row[col.property]) return row[col.property] + "晚";
+      else return "/";
     },
     timeFormatter(row, col) {
-      return row[col.property] + " 12:00:00";
+      if (row[col.property]) return row[col.property];
+      else return "/";
     },
     priceFormatter(row, col) {
-      return "￥" + row[col.property];
+      if (row[col.property]) return "￥" + row[col.property];
+      else return "/";
     },
     // 显示第几页
     handleCurrentChange(val) {

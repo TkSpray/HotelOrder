@@ -248,7 +248,8 @@
             ordertime:Date,        //预订时间
             preintime:Date,        //预计入住时间
             preouttime:Date,       //预计退房时间
-            total: String          //住几晚
+            total: String,          //住几晚
+            price:int       //应付金额
     }
 }
 ```
@@ -274,9 +275,7 @@
     contentType:"application/json",
     param:{
         orderid:int,
-        roomid:String,     //对应订单的房间ID
         intime:Date,    //入住时间
-        price:int       //应付金额
     }
 }
 ```
@@ -328,7 +327,6 @@
     param:{
         orderid:int,        //订单ID
         outtime:Date,       //退房时间
-        "overtime": boolean //是否超时
     }
 }
 ```
