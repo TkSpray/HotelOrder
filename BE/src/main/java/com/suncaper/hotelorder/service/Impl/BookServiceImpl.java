@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -156,11 +157,19 @@ public class BookServiceImpl implements BookService {
      * @param outtime
      */
     @Override
-    public boolean checkout(int orderid, Date outtime, boolean overtime) {
+    public boolean checkout(int orderid, Date outtime) {
         //1、修改订单表
         Orders orders = ordersMapper.selectByPrimaryKey(orderid);
         orders.setOuttime(outtime);
-        orders.setOvertime(overtime);
+
+        Date nowtime = new Date();
+
+        if(nowtime.compareTo(orders.getPreouttime()) > 0){          //超时
+            orders.setOvertime(true);
+        }else{                                                      //未超时
+            orders.setOvertime(false);
+        }
+
         orders.setOrderstate(2);
         ordersMapper.updateByPrimaryKeySelective(orders);
 
