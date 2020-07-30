@@ -10,7 +10,7 @@
       <el-form :inline="true" :model="formInline" class="form-inline">
         <el-form-item>
           <el-input
-            v-model="formInline.user"
+            v-model="formInline.staffid"
             placeholder="请输入员工号"
             prefix-icon="el-icon-s-custom"
           ></el-input>
@@ -40,14 +40,23 @@ export default {
   data() {
     return {
       formInline: {
-        user: "",
+        staffid: "",
         password: ""
       }
     };
   },
   methods: {
     onSubmit() {
-      this.$router.push({ name: "home" });
+      console.log(this.formInline);
+
+      this.$axios({
+        url: "/login",
+        params: this.formInline
+      }).then(res => {
+        if (res.data.code == 0) {
+          this.$router.push({ name: "home" });
+        }
+      });
     }
   }
 };

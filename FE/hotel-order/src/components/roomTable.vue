@@ -177,8 +177,10 @@ export default {
         ordertime: "",
         preintime: "",
         preouttime: "",
-        total: ""
+        total: "",
+        price: 0
       },
+      price: 0,
       date: [],
       dialogFormVisible: false,
       formLabelWidth: "120px",
@@ -198,6 +200,7 @@ export default {
     handle(index, row) {
       this.dialogFormVisible = true;
       this.form.roomid = row.roomid;
+      this.price = row.price;
       console.log(index, row);
     },
     tableFormatter(row, col) {
@@ -239,14 +242,25 @@ export default {
         this.form.preintime = start + " 12:00:00";
         this.form.preouttime = end + " 12:00:00";
         this.form.total = days;
+        this.form.price = days * this.price;
         console.log(this.form);
         this.$axios({
           url: "/book",
           data: this.form
         }).then(res => {
-          console.log(res);
-          this.$store.dispatch("getOrderlist");
-          this.$store.dispatch("getRoomlist");
+          if (res.data.code == 0) {
+            this.$message({
+              message: "预订成功",
+              type: "success"
+            });
+            this.$store.dispatch("getOrderlist");
+            this.$store.dispatch("getRoomlist");
+          } else {
+            this.$message({
+              type: "error",
+              message: "错误"
+            });
+          }
         });
       } else if (this.type == 2) {
         console.log(this.form);

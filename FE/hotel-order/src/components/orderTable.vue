@@ -207,13 +207,20 @@ export default {
       }).then(() => {
         this.$axios({
           url: "/checkout",
-          data: {}
+          params: {
+            orderid: row.orderid,
+            outtime:
+              this.formatDate(new Date()) + " " + this.formatTime(new Date())
+          }
         }).then(res => {
-          this.$message({
-            type: "success",
-            message: "退房成功!"
-          });
-          console.log(res);
+          if (res.data.code == 0) {
+            this.$message({
+              type: "success",
+              message: "退房成功!"
+            });
+            this.$store.dispatch("getOrderlist");
+            this.$store.dispatch("getRoomlist");
+          }
         });
       });
     },
@@ -226,13 +233,26 @@ export default {
       }).then(() => {
         this.$axios({
           url: "/book_to_order",
-          data: {}
+          params: {
+            orderid: row.orderid,
+            intime:
+              this.formatDate(new Date()) + " " + this.formatTime(new Date())
+          }
         }).then(res => {
-          this.$message({
-            type: "success",
-            message: "入住成功!"
-          });
-          console.log(res);
+          if (res.data.code == 0) {
+            this.$store.dispatch("getOrderlist");
+            this.$store.dispatch("getRoomlist");
+            this.$message({
+              type: "success",
+              message: "入住成功!"
+            });
+            console.log(res);
+          } else {
+            this.$message({
+              type: "error",
+              message: "错误"
+            });
+          }
         });
       });
     },
@@ -245,13 +265,21 @@ export default {
       }).then(() => {
         this.$axios({
           url: "/cancelbook",
-          data: {}
+          params: {
+            orderid: row.orderid
+          }
         }).then(res => {
-          this.$message({
-            type: "success",
-            message: "取消预订成功!"
-          });
-          console.log(res);
+          if (res.data.code == 0) {
+            this.$message({
+              type: "success",
+              message: "取消预订成功!"
+            });
+          } else {
+            this.$message({
+              type: "error",
+              message: "错误"
+            });
+          }
         });
       });
     },
@@ -281,6 +309,16 @@ export default {
     filterHandler(value, row, column) {
       const property = column["property"];
       return row[property] === value;
+    },
+    formatDate(date) {
+      return (
+        date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+      );
+    },
+    formatTime(time) {
+      return (
+        time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
+      );
     }
   }
 };

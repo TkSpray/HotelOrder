@@ -19,7 +19,7 @@ export default {
   },
   mounted() {
     this.orderlist = this.$store.state.orderlist.filter(
-      order => order.orderstatus == 1
+      order => order.orderstate == 1
     );
   },
   methods: {}
