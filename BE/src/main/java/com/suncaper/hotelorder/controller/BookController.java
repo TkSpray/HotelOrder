@@ -79,10 +79,10 @@ public class BookController {
         return Result.myJSONResult(-1,"取消预订失败");
     }
 
-    @RequestMapping("checkout")
+    @RequestMapping("/checkout")
     @ResponseBody
-    public Object checkout(@RequestParam("orderid") int orderid, @RequestParam("outtime")Date outtime, @RequestParam("overtime") boolean overtime){
-        Boolean isSuccess = bookService.checkout(orderid, outtime, overtime);
+    public Object checkout(@RequestParam("orderid") int orderid, @RequestParam("outtime")Date outtime){
+        Boolean isSuccess = bookService.checkout(orderid, outtime);
         if(isSuccess)
             return Result.myJSONResult(0,"退房成功");
         return Result.myJSONResult(-1,"退房失败");
