@@ -8,11 +8,11 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="roomID" jdbcType="VARCHAR" property="roomid" />
     <result column="roomtype" jdbcType="INTEGER" property="roomtype" />
-    <result column="ordertime" jdbcType="DATE" property="ordertime" />
-    <result column="preintime" jdbcType="DATE" property="preintime" />
-    <result column="intime" jdbcType="DATE" property="intime" />
-    <result column="preouttime" jdbcType="DATE" property="preouttime" />
-    <result column="outtime" jdbcType="DATE" property="outtime" />
+    <result column="ordertime" jdbcType="TIMESTAMP" property="ordertime" />
+    <result column="preintime" jdbcType="TIMESTAMP" property="preintime" />
+    <result column="intime" jdbcType="TIMESTAMP" property="intime" />
+    <result column="preouttime" jdbcType="TIMESTAMP" property="preouttime" />
+    <result column="outtime" jdbcType="TIMESTAMP" property="outtime" />
     <result column="total" jdbcType="INTEGER" property="total" />
     <result column="price" jdbcType="INTEGER" property="price" />
     <result column="overtime" jdbcType="BIT" property="overtime" />
@@ -119,8 +119,8 @@
       )
     values (#{orderid,jdbcType=INTEGER}, #{guestid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{roomid,jdbcType=VARCHAR}, #{roomtype,jdbcType=INTEGER}, 
-      #{ordertime,jdbcType=DATE}, #{preintime,jdbcType=DATE}, #{intime,jdbcType=DATE}, 
-      #{preouttime,jdbcType=DATE}, #{outtime,jdbcType=DATE}, #{total,jdbcType=INTEGER}, 
+      #{ordertime,jdbcType=TIMESTAMP}, #{preintime,jdbcType=TIMESTAMP}, #{intime,jdbcType=TIMESTAMP}, 
+      #{preouttime,jdbcType=TIMESTAMP}, #{outtime,jdbcType=TIMESTAMP}, #{total,jdbcType=INTEGER}, 
       #{price,jdbcType=INTEGER}, #{overtime,jdbcType=BIT}, #{orderstate,jdbcType=INTEGER}
       )
   </insert>
@@ -193,19 +193,19 @@
         #{roomtype,jdbcType=INTEGER},
       </if>
       <if test="ordertime != null">
-        #{ordertime,jdbcType=DATE},
+        #{ordertime,jdbcType=TIMESTAMP},
       </if>
       <if test="preintime != null">
-        #{preintime,jdbcType=DATE},
+        #{preintime,jdbcType=TIMESTAMP},
       </if>
       <if test="intime != null">
-        #{intime,jdbcType=DATE},
+        #{intime,jdbcType=TIMESTAMP},
       </if>
       <if test="preouttime != null">
-        #{preouttime,jdbcType=DATE},
+        #{preouttime,jdbcType=TIMESTAMP},
       </if>
       <if test="outtime != null">
-        #{outtime,jdbcType=DATE},
+        #{outtime,jdbcType=TIMESTAMP},
       </if>
       <if test="total != null">
         #{total,jdbcType=INTEGER},
@@ -249,19 +249,19 @@
         roomtype = #{record.roomtype,jdbcType=INTEGER},
       </if>
       <if test="record.ordertime != null">
-        ordertime = #{record.ordertime,jdbcType=DATE},
+        ordertime = #{record.ordertime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.preintime != null">
-        preintime = #{record.preintime,jdbcType=DATE},
+        preintime = #{record.preintime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.intime != null">
-        intime = #{record.intime,jdbcType=DATE},
+        intime = #{record.intime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.preouttime != null">
-        preouttime = #{record.preouttime,jdbcType=DATE},
+        preouttime = #{record.preouttime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.outtime != null">
-        outtime = #{record.outtime,jdbcType=DATE},
+        outtime = #{record.outtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.total != null">
         total = #{record.total,jdbcType=INTEGER},
@@ -288,11 +288,11 @@
       phone = #{record.phone,jdbcType=VARCHAR},
       roomID = #{record.roomid,jdbcType=VARCHAR},
       roomtype = #{record.roomtype,jdbcType=INTEGER},
-      ordertime = #{record.ordertime,jdbcType=DATE},
-      preintime = #{record.preintime,jdbcType=DATE},
-      intime = #{record.intime,jdbcType=DATE},
-      preouttime = #{record.preouttime,jdbcType=DATE},
-      outtime = #{record.outtime,jdbcType=DATE},
+      ordertime = #{record.ordertime,jdbcType=TIMESTAMP},
+      preintime = #{record.preintime,jdbcType=TIMESTAMP},
+      intime = #{record.intime,jdbcType=TIMESTAMP},
+      preouttime = #{record.preouttime,jdbcType=TIMESTAMP},
+      outtime = #{record.outtime,jdbcType=TIMESTAMP},
       total = #{record.total,jdbcType=INTEGER},
       price = #{record.price,jdbcType=INTEGER},
       overtime = #{record.overtime,jdbcType=BIT},
@@ -320,19 +320,19 @@
         roomtype = #{roomtype,jdbcType=INTEGER},
       </if>
       <if test="ordertime != null">
-        ordertime = #{ordertime,jdbcType=DATE},
+        ordertime = #{ordertime,jdbcType=TIMESTAMP},
       </if>
       <if test="preintime != null">
-        preintime = #{preintime,jdbcType=DATE},
+        preintime = #{preintime,jdbcType=TIMESTAMP},
       </if>
       <if test="intime != null">
-        intime = #{intime,jdbcType=DATE},
+        intime = #{intime,jdbcType=TIMESTAMP},
       </if>
       <if test="preouttime != null">
-        preouttime = #{preouttime,jdbcType=DATE},
+        preouttime = #{preouttime,jdbcType=TIMESTAMP},
       </if>
       <if test="outtime != null">
-        outtime = #{outtime,jdbcType=DATE},
+        outtime = #{outtime,jdbcType=TIMESTAMP},
       </if>
       <if test="total != null">
         total = #{total,jdbcType=INTEGER},
@@ -356,11 +356,11 @@
       phone = #{phone,jdbcType=VARCHAR},
       roomID = #{roomid,jdbcType=VARCHAR},
       roomtype = #{roomtype,jdbcType=INTEGER},
-      ordertime = #{ordertime,jdbcType=DATE},
-      preintime = #{preintime,jdbcType=DATE},
-      intime = #{intime,jdbcType=DATE},
-      preouttime = #{preouttime,jdbcType=DATE},
-      outtime = #{outtime,jdbcType=DATE},
+      ordertime = #{ordertime,jdbcType=TIMESTAMP},
+      preintime = #{preintime,jdbcType=TIMESTAMP},
+      intime = #{intime,jdbcType=TIMESTAMP},
+      preouttime = #{preouttime,jdbcType=TIMESTAMP},
+      outtime = #{outtime,jdbcType=TIMESTAMP},
       total = #{total,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
       overtime = #{overtime,jdbcType=BIT},
