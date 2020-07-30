@@ -1,18 +1,13 @@
-# 数据库连接设置
+#数据库连接设置
 #在自己电脑上连接时，只需改这个文件和generatoConfig文件的用户和密码
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/hotelorder?&useSSL=false&serverTimezone=UTC
     username: root
-    password: txl1205TXL
+    password: 123
 
 
-
-  # 设置全局日期格式,如果设置这个格式,则代码中@DateTimeFormat(pattern = "dd/MM/yyyy") 无效!!
-  mvc:
-    format:
-      date: yyyy-MM-dd
 server:
   port: 8080
   servlet:
