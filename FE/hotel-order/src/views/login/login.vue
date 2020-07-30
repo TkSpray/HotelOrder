@@ -48,7 +48,6 @@ export default {
   methods: {
     onSubmit() {
       console.log(this.formInline);
-
       this.$axios({
         url: "/login",
         params: this.formInline

@@ -116,13 +116,9 @@
             		guestID: String,         //身份证号NOT NULL
             		name: String,       //姓名NOT NULL
             		phone: String,       //电话
-    						roomtype:Number,  		 //房间类型编号NOT NULL
     						roomID:String			//房间号NOT NULL
-  							ordertime:datetime,	  //预定时间
-								preintime:datetime,   //预计入住时间
 								intime:datetime,   	  //实际入住时间
 								preouttime:datetime,  //预计退房时间
-								outtime:datetime,	    //实际退房时间
         				total:Number,         //总计时间
         				price:Number		      //总价
     }

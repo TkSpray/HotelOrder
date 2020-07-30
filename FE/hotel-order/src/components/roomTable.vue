@@ -110,9 +110,8 @@
           ></el-input>
         </el-form-item>
         <el-form-item
-          label="预计入住时间"
+          :label="type == 1 ? '预计入住时间' : '入住时间'"
           :label-width="formLabelWidth"
-          v-if="type == 1"
         >
           <el-date-picker
             v-model="date"
@@ -174,8 +173,6 @@ export default {
         name: "",
         phone: "",
         roomid: "",
-        ordertime: "",
-        preintime: "",
         preouttime: "",
         total: "",
         price: 0
@@ -201,7 +198,7 @@ export default {
       this.dialogFormVisible = true;
       this.form.roomid = row.roomid;
       this.price = row.price;
-      console.log(index, row);
+      console.log(index);
     },
     tableFormatter(row, col) {
       return this[col.property][Number(row[col.property])].text;
@@ -229,21 +226,20 @@ export default {
       );
     },
     confirmInfo() {
+      const nowData = new Date();
+      this.dialogFormVisible = false;
+      let days = (this.date[1] - this.date[0]) / (24 * 60 * 60 * 1000);
+      let start = this.formatDate(this.date[0]);
+      let end = this.formatDate(this.date[1]);
+
+      this.form[this.type == 1 ? "ordertime" : "intime"] =
+        this.formatDate(nowData) + " " + this.formatTime(nowData);
+      this.form.preouttime = end + " 12:00:00";
+      this.form.total = days;
+      this.form.price = days * this.price;
+      console.log(this.form);
       if (this.type == 1) {
-        const nowData = new Date();
-        this.dialogFormVisible = false;
-        let days = (this.date[1] - this.date[0]) / (24 * 60 * 60 * 1000);
-        this.form.ordertime =
-          this.formatDate(nowData) + " " + this.formatTime(nowData);
-
-        let start = this.formatDate(this.date[0]);
-        let end = this.formatDate(this.date[1]);
-
         this.form.preintime = start + " 12:00:00";
-        this.form.preouttime = end + " 12:00:00";
-        this.form.total = days;
-        this.form.price = days * this.price;
-        console.log(this.form);
         this.$axios({
           url: "/book",
           params: this.form
@@ -263,7 +259,24 @@ export default {
           }
         });
       } else if (this.type == 2) {
-        console.log(this.form);
+        this.$axios({
+          url: "/page/check_in",
+          params: this.form
+        }).then(res => {
+          if (res.data.code == 0) {
+            this.$message({
+              message: "办理成功",
+              type: "success"
+            });
+            this.$store.dispatch("getOrderlist");
+            this.$store.dispatch("getRoomlist");
+          } else {
+            this.$message({
+              type: "error",
+              message: "错误"
+            });
+          }
+        });
       }
     }
   }
