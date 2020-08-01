@@ -16,7 +16,7 @@
           <el-col :span="12" class="user">
             <img src="../../assets/home/userlogo.svg" class="userlogo" />
             <span class="username">{{ admin }}</span>
-            <span class="logout">
+            <span class="logout" @click="logout">
               退出登录
             </span>
           </el-col>
@@ -108,6 +108,9 @@ export default {
     changeTitle(title) {
       let str = title.substring(6);
       this.title = str ? this.map[str] : "系统首页";
+    },
+    logout() {
+      this.$router.push({ name: "login" });
     }
   }
 };
