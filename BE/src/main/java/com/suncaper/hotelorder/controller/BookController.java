@@ -7,6 +7,7 @@ import com.suncaper.hotelorder.mapper.OrdersMapper;
 import com.suncaper.hotelorder.mapper.RoomMapper;
 import com.suncaper.hotelorder.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,7 +82,7 @@ public class BookController {
 
     @RequestMapping("/checkout")
     @ResponseBody
-    public Object checkout(@RequestParam("orderid") int orderid, @RequestParam("outtime")Date outtime){
+    public Object checkout(@RequestParam("orderid") int orderid, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date outtime){
         Boolean isSuccess = bookService.checkout(orderid, outtime);
         if(isSuccess)
             return Result.myJSONResult(0,"退房成功");

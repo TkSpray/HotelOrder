@@ -113,14 +113,15 @@
     URL: "/page/check_in",
     method: "POST",
     param：{
-            		guestID: String,         //身份证号NOT NULL
-            		name: String,       //姓名NOT NULL
-            		phone: String,       //电话
-    						roomID:String			//房间号NOT NULL
-								intime:datetime,   	  //实际入住时间
-								preouttime:datetime,  //预计退房时间
-        				total:Number,         //总计时间
-        				price:Number		      //总价
+            	guestID: String,         //身份证号NOT NULL
+            	name: String,       //姓名NOT NULL
+            	phone: String,       //电话
+    			roomID:String			//房间号NOT NULL
+				intime:datetime,   	  //实际入住时间
+				preouttime:datetime,  //预计退房时间
+        		total:Number,         //总计时间
+        		price:Number		      //总价
+    			roomtype:Number			//房型NOT NULL
     }
 }
 ```

@@ -33,9 +33,6 @@ public class CheckinController {
     @RequestMapping("/check_in")
     @ResponseBody
     public Object Checkin(Orders order) throws ParseException {
-        if(checkService.orderID_error(order) == true){
-            return Result.myJSONResult(1,"订单号错误!");
-        }
         if(checkService.roomID_error(order) == true){
             return Result.myJSONResult(1,"房间号不存在！");
         }
