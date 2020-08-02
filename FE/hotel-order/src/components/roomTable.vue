@@ -181,7 +181,7 @@ export default {
       date: [],
       dialogFormVisible: false,
       formLabelWidth: "120px",
-      selectType: "",
+      roomType: "",
       // 默认显示第几页
       currentPage: 1,
       // 总条数，根据接口获取数据长度(注意：这里不能为空)
@@ -198,6 +198,7 @@ export default {
       this.dialogFormVisible = true;
       this.form.roomid = row.roomid;
       this.price = row.price;
+      this.roomType = row.roomtype;
       console.log(index);
     },
     tableFormatter(row, col) {
@@ -259,8 +260,9 @@ export default {
           }
         });
       } else if (this.type == 2) {
+        this.form.roomtype = this.roomType;
         this.$axios({
-          url: "/page/check_in",
+          url: "/check_in",
           params: this.form
         }).then(res => {
           if (res.data.code == 0) {

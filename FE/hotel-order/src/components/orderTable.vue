@@ -275,7 +275,7 @@ export default {
             this.$store.dispatch("getRoomlist");
             this.$message({
               type: "success",
-              message: "取消预订成功!"
+              message: "退订成功!"
             });
           } else {
             this.$message({
