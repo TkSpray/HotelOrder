@@ -18,29 +18,29 @@ export default {
   data() {
     return {
       map: {
-        roombook: '房间预订',
-        checkin: '来客入住',
-        checkout: '办理退房',
-        orderlist: '订单列表',
-        roomlist: '房间列表',
+        roombook: "房间预订",
+        checkin: "来客入住",
+        checkout: "办理退房",
+        orderlist: "订单列表",
+        roomlist: "房间列表"
       },
-      publicPath: process.env.BASE_URL,
-    }
+      publicPath: process.env.BASE_URL
+    };
   },
   methods: {
     srcDeal(src) {
-      return `${this.publicPath}home/` + src + `.svg`
+      return `${this.publicPath}home/` + src + `.svg`;
     },
     routeto(key) {
-      let str = key == 'roombook' ? '/home/book' : '/home/' + key
-      this.$emit('getTitle', str)
-      console.log(str)
+      let str = key == "roombook" ? "/home/book" : "/home/" + key;
+      this.$emit("getTitle", str);
+      console.log(str);
       this.$router.push({
-        path: str,
-      })
-    },
-  },
-}
+        path: str
+      });
+    }
+  }
+};
 </script>
 
 <style>
