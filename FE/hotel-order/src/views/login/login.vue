@@ -54,6 +54,11 @@ export default {
       }).then(res => {
         if (res.data.code == 0) {
           this.$router.push({ name: "home" });
+        } else {
+          this.$message({
+            type: "error",
+            message: "错误"
+          });
         }
       });
     }

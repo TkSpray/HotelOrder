@@ -188,15 +188,17 @@ export default {
       ],
       // 默认显示第几页
       currentPage: 1,
-      // 总条数，根据接口获取数据长度(注意：这里不能为空)
-      totalCount: 1,
       // 默认每页显示的条数（可修改）
       PageSize: 10
     };
   },
   mounted() {
-    this.totalCount = this.orderlist.length;
     this.labelWidth = this.type == 2 ? "160" : "90";
+  },
+  computed: {
+    totalCount() {
+      return this.orderlist.length;
+    }
   },
   methods: {
     checkout(index, row) {
