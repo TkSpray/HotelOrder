@@ -188,9 +188,6 @@ export default {
       PageSize: 10
     };
   },
-  mounted() {
-    this.totalCount = this.roomlist.length;
-  },
   computed: {
     totalCount() {
       return this.orderlist.length;
