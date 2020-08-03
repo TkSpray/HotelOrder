@@ -2,10 +2,11 @@
   <section class="section">
     <el-table
       :data="
-        roomlist.slice((currentPage - 1) * PageSize, currentPage * PageSize)
+        datalist.slice((currentPage - 1) * PageSize, currentPage * PageSize)
       "
       border
       style="width:100%"
+      @filter-change="filterTagTable"
     >
       <el-table-column
         label="房间号"
@@ -20,7 +21,8 @@
         align="center"
         :formatter="tableFormatter"
         :filters="roomtype"
-        :filter-method="filterHandler"
+        :filter-multiple="false"
+        :column-key="'roomtype'"
       ></el-table-column>
       <el-table-column
         label="价格"
@@ -61,8 +63,9 @@
         align="center"
         :formatter="tableFormatter"
         :filters="status"
-        :filter-method="filterHandler"
         v-if="!type"
+        :filter-multiple="false"
+        :column-key="'status'"
       ></el-table-column>
       <el-table-column label="操作" align="center" v-if="type">
         <template slot-scope="scope">
@@ -185,15 +188,61 @@ export default {
       // 默认显示第几页
       currentPage: 1,
       // 默认每页显示的条数（可修改）
-      PageSize: 10
+      PageSize: 10,
+      statusFilter: -1,
+      roomtypeFilter: -1
     };
   },
   computed: {
     totalCount() {
-      return this.roomlist.length;
+      return this.datalist.length;
+    },
+    datalist: {
+      get() {
+        if (this.roomtypeFilter != -1 && this.statusFilter == -1) {
+          return this.roomlist.filter(data => {
+            if (data.roomtype == this.roomtypeFilter) {
+              return true;
+            } else return false;
+          });
+        }
+        if (this.statusFilter != -1 && this.roomtypeFilter == -1) {
+          return this.roomlist.filter(data => {
+            if (data.status == this.statusFilter) {
+              return true;
+            } else return false;
+          });
+        }
+        if (this.roomtypeFilter != -1 && this.statusFilter != -1) {
+          return this.roomlist
+            .filter(data => {
+              if (data.roomtype == this.roomtypeFilter) {
+                return true;
+              } else return false;
+            })
+            .filter(data => {
+              if (data.status == this.statusFilter) {
+                return true;
+              } else return false;
+            });
+        }
+        return this.roomlist;
+      },
+      set(val) {
+        console.log(val);
+      }
     }
   },
   methods: {
+    filterTagTable(filters) {
+      if (filters.status) {
+        this.statusFilter =
+          typeof filters.status[0] === "number" ? filters.status[0] : -1;
+      } else if (filters.roomtype) {
+        this.roomtypeFilter =
+          typeof filters.roomtype[0] == "number" ? filters.roomtype[0] : -1;
+      }
+    },
     handle(index, row) {
       this.dialogFormVisible = true;
       this.form.roomid = row.roomid;

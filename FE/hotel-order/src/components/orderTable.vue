@@ -2,10 +2,11 @@
   <div>
     <el-table
       :data="
-        orderlist.slice((currentPage - 1) * PageSize, currentPage * PageSize)
+        datalist.slice((currentPage - 1) * PageSize, currentPage * PageSize)
       "
       border
       style="width:100%"
+      @filter-change="filterTagTable"
     >
       <el-table-column
         label="订单状态"
@@ -13,9 +14,10 @@
         align="center"
         :formatter="tableFormatter"
         :filters="orderstate"
-        :filter-method="filterHandler"
+        :filter-multiple="false"
         width="100"
         v-if="!type"
+        :column-key="'orderstate'"
       ></el-table-column>
       <el-table-column
         label="姓名"
@@ -47,7 +49,8 @@
         align="center"
         :formatter="tableFormatter"
         :filters="roomtype"
-        :filter-method="filterHandler"
+        :filter-multiple="false"
+        :column-key="'roomtype'"
       ></el-table-column>
       <el-table-column
         label="预订时间"
@@ -189,15 +192,53 @@ export default {
       // 默认显示第几页
       currentPage: 1,
       // 默认每页显示的条数（可修改）
-      PageSize: 10
+      PageSize: 10,
+      orderstateFilter: -1,
+      roomtypeFilter: -1
     };
   },
   mounted() {
     this.labelWidth = this.type == 2 ? "160" : "90";
+    this.datalist = this.orderlist.slice();
   },
   computed: {
     totalCount() {
-      return this.orderlist.length;
+      return this.datalist.length;
+    },
+    datalist: {
+      get() {
+        if (this.roomtypeFilter != -1 && this.orderstateFilter == -1) {
+          return this.orderlist.filter(data => {
+            if (data.roomtype == this.roomtypeFilter) {
+              return true;
+            } else return false;
+          });
+        }
+        if (this.orderstateFilter != -1 && this.roomtypeFilter == -1) {
+          return this.orderlist.filter(data => {
+            if (data.orderstate == this.orderstateFilter) {
+              return true;
+            } else return false;
+          });
+        }
+        if (this.roomtypeFilter != -1 && this.orderstateFilter != -1) {
+          return this.orderlist
+            .filter(data => {
+              if (data.roomtype == this.roomtypeFilter) {
+                return true;
+              } else return false;
+            })
+            .filter(data => {
+              if (data.orderstate == this.orderstateFilter) {
+                return true;
+              } else return false;
+            });
+        }
+        return this.orderlist;
+      },
+      set(val) {
+        console.log(val);
+      }
     }
   },
   methods: {
@@ -287,6 +328,15 @@ export default {
           }
         });
       });
+    },
+    filterTagTable(filters) {
+      if (filters.orderstate) {
+        this.orderstateFilter =
+          typeof filters.orderstate[0] == "number" ? filters.orderstate[0] : -1;
+      } else if (filters.roomtype) {
+        this.roomtypeFilter =
+          typeof filters.roomtype[0] == "number" ? filters.roomtype[0] : -1;
+      }
     },
     tableFormatter(row, col) {
       if (this[col.property][Number(row[col.property])])
