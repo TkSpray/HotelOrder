@@ -54,10 +54,15 @@ export default {
       }).then(res => {
         if (res.data.code == 0) {
           this.$router.push({ name: "home" });
+        } else if (res.data.code == -1) {
+          this.$message({
+            type: "error",
+            message: "用户名或密码错误"
+          });
         } else {
           this.$message({
             type: "error",
-            message: "错误"
+            message: "网络错误"
           });
         }
       });
