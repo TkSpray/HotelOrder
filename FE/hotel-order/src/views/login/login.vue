@@ -75,8 +75,7 @@ export default {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.498039215686275);
   color: #ffffff;
-  height: 240px;
-  overflow: hidden;
+  overflow: scroll;
   width: 100%;
   top: 50%;
   transform: translateY(-50%);
@@ -92,6 +91,7 @@ export default {
   text-align: center;
   margin: 30px auto;
   margin-bottom: 45px;
+  min-width: 700px;
 }
 .login-header h1 {
   margin: 0;
