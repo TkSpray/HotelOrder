@@ -190,7 +190,7 @@ export default {
   },
   computed: {
     totalCount() {
-      return this.orderlist.length;
+      return this.roomlist.length;
     }
   },
   methods: {
