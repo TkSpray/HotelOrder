@@ -57,6 +57,7 @@ export default {
     },
     reset() {
       this.orderlist = this.alllist;
+      this.searchData = "";
     }
   }
 };
