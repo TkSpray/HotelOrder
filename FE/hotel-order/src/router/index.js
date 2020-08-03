@@ -10,7 +10,7 @@ const routes = [
   },
   {
     path: "/login",
-    name: "hogin",
+    name: "login",
     component: () => import("../views/login/login.vue")
   },
   {
