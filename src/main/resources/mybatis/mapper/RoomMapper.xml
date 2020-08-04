@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suncaper.hotelorder.mapper.RoomMapper">
+  <resultMap id="BaseResultMap" type="com.suncaper.hotelorder.domain.Room">
+    <id column="roomID" jdbcType="VARCHAR" property="roomid" />
+    <result column="roomtype" jdbcType="INTEGER" property="roomtype" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="numberofpeople" jdbcType="INTEGER" property="numberofpeople" />
+    <result column="floor" jdbcType="INTEGER" property="floor" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="includebrk" jdbcType="BIT" property="includebrk" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    roomID, roomtype, price, numberofpeople, floor, area, includebrk, status
+  </sql>
+  <select id="selectByExample" parameterType="com.suncaper.hotelorder.domain.RoomExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from room
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from room
+    where roomID = #{roomid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from room
+    where roomID = #{roomid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.suncaper.hotelorder.domain.RoomExample">
+    delete from room
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.suncaper.hotelorder.domain.Room">
+    insert into room (roomID, roomtype, price, 
+      numberofpeople, floor, area, 
+      includebrk, status)
+    values (#{roomid,jdbcType=VARCHAR}, #{roomtype,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
+      #{numberofpeople,jdbcType=INTEGER}, #{floor,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, 
+      #{includebrk,jdbcType=BIT}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suncaper.hotelorder.domain.Room">
+    insert into room
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roomid != null">
+        roomID,
+      </if>
+      <if test="roomtype != null">
+        roomtype,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="numberofpeople != null">
+        numberofpeople,
+      </if>
+      <if test="floor != null">
+        floor,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="includebrk != null">
+        includebrk,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roomid != null">
+        #{roomid,jdbcType=VARCHAR},
+      </if>
+      <if test="roomtype != null">
+        #{roomtype,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="numberofpeople != null">
+        #{numberofpeople,jdbcType=INTEGER},
+      </if>
+      <if test="floor != null">
+        #{floor,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="includebrk != null">
+        #{includebrk,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.suncaper.hotelorder.domain.RoomExample" resultType="java.lang.Long">
+    select count(*) from room
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update room
+    <set>
+      <if test="record.roomid != null">
+        roomID = #{record.roomid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roomtype != null">
+        roomtype = #{record.roomtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.numberofpeople != null">
+        numberofpeople = #{record.numberofpeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.floor != null">
+        floor = #{record.floor,jdbcType=INTEGER},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.includebrk != null">
+        includebrk = #{record.includebrk,jdbcType=BIT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update room
+    set roomID = #{record.roomid,jdbcType=VARCHAR},
+      roomtype = #{record.roomtype,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      numberofpeople = #{record.numberofpeople,jdbcType=INTEGER},
+      floor = #{record.floor,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=VARCHAR},
+      includebrk = #{record.includebrk,jdbcType=BIT},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suncaper.hotelorder.domain.Room">
+    update room
+    <set>
+      <if test="roomtype != null">
+        roomtype = #{roomtype,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="numberofpeople != null">
+        numberofpeople = #{numberofpeople,jdbcType=INTEGER},
+      </if>
+      <if test="floor != null">
+        floor = #{floor,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="includebrk != null">
+        includebrk = #{includebrk,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where roomID = #{roomid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suncaper.hotelorder.domain.Room">
+    update room
+    set roomtype = #{roomtype,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      numberofpeople = #{numberofpeople,jdbcType=INTEGER},
+      floor = #{floor,jdbcType=INTEGER},
+      area = #{area,jdbcType=VARCHAR},
+      includebrk = #{includebrk,jdbcType=BIT},
+      status = #{status,jdbcType=INTEGER}
+    where roomID = #{roomid,jdbcType=VARCHAR}
+  </update>
+</mapper>
