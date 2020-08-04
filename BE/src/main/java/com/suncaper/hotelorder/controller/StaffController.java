@@ -49,7 +49,7 @@ public class StaffController {
             return Result.myJSONResult(-1,"账号错误");
         } else {
             if (staffInDB.getPassword().equals(staff.getPassword())) {
-                return Result.myJSONResult(0,"登录成功");
+                return Result.myJSONResult(0,"登录成功",staffInDB.getName());
             } else {
                 return Result.myJSONResult(1,"密码错误");
             }
