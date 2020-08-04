@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 测试
  */
-@SpringBootTest
+//@SpringBootTest
 class HotelorderApplicationTests {
     @Autowired
     OrdersMapper ordersMapper;
