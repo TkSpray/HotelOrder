@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     roomlist: [],
-    orderlist: []
+    orderlist: [],
+    name: ""
   },
   mutations: {
     getRoomlist(state, list) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     getOrderlist(state, list) {
       state.orderlist = list;
+    },
+    getName(state, name) {
+      state.name = name;
     }
   },
   actions: {

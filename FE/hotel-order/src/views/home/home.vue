@@ -88,7 +88,7 @@ export default {
   data() {
     return {
       pid: 0,
-      admin: "817号工作人员小花",
+      admin: "",
       title: "系统首页",
       map: {
         book: "办理预订",
@@ -103,6 +103,7 @@ export default {
   mounted() {
     this.$store.dispatch("getOrderlist");
     this.$store.dispatch("getRoomlist");
+    this.admin = this.$store.state.name;
   },
   methods: {
     changeTitle(title) {

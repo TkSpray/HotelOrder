@@ -21,6 +21,7 @@
             placeholder="请输入登录密码"
             type="password"
             prefix-icon="el-icon-lock"
+            @keyup.enter.native="onSubmit"
           ></el-input>
         </el-form-item>
         <el-form-item>
@@ -53,6 +54,8 @@ export default {
         params: this.formInline
       }).then(res => {
         if (res.data.code == 0) {
+          this.$store.commit("getName", res.data.data);
+          console.log(this.$store.state.name);
           this.$router.push({ name: "home" });
         } else if (res.data.code == -1) {
           this.$message({
