@@ -9,7 +9,6 @@
       <img style="width: 100px; height: 100px" :src="srcDeal(key)" />
       <span class="demonstration">{{ value }}</span>
     </div>
-    <img src="/public/home/checkin.svg" alt="" style="height:40px;width:40px" />
   </section>
 </template>
 
